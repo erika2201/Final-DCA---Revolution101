@@ -1,12 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import processing.core.PApplet;
 
 public class Logic {
 	private PApplet app;
-	private ArrayList<Player> playerList;
+	private LinkedList<Player> playerList;
 	private ArrayList<Enemy> enemyList;
 	private ByName sortByName;
 	private ByScore sortByScore;
@@ -15,5 +16,6 @@ public class Logic {
 	
 	public Logic(PApplet app) {
 		this.app = app;
+		
 	}
 }

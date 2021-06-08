@@ -30,5 +30,12 @@ public class NameScreen extends Screen {
 		 
 
 	}
+	public void show() {
+		cp5.get("name").show();
+	}
+	public void hide() {
+		cp5.get("name").hide();
+	}
+
 
 }

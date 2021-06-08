@@ -37,7 +37,7 @@ public class Main extends PApplet {
 		result = new ResultScreen(this);
 		victory = new VictoryScreen(this);
 		defeat = new DefeatScreen(this);
-
+		name.textFields();
 		screen = 0;
 
 	}
@@ -52,10 +52,11 @@ public class Main extends PApplet {
 		// Name
 		case 0:
 			name.draw();
-			name.textFields();
+			name.show();
 			break;
 		// Home
 		case 1:
+			name.hide();
 			home.draw();
 			break;
 		// Nivel1
@@ -95,6 +96,6 @@ public class Main extends PApplet {
 	
 	@Override
 	public void mouseClicked() {
-		//screen +=1;
+		screen +=1;
 	}
 }
