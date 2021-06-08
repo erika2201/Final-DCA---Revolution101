@@ -8,11 +8,11 @@ public abstract class Screen {
 
 	protected PApplet app;
 	protected ControlP5 cp5;
-	protected PImage Name, Home, Score, Game1, Game2, Game3, Result;
+	protected PImage Name, Home, Score, Game1, Game2, Game3, Result, Victory, Defeat;
 
 	public Screen(PApplet app) {
 		this.app = app;
-		this.cp5 = cp5;
+		this.cp5 =new ControlP5 (app);
 		Name = app.loadImage("img/Name.png");
 		Home = app.loadImage("img/Home.png");
 		Score = app.loadImage("img/Score.png");
@@ -20,6 +20,8 @@ public abstract class Screen {
 		Game2 = app.loadImage("img/Level2.png");
 		Game3 = app.loadImage("img/Level3.png");
 		Result = app.loadImage("img/Summary.png");
+		Victory = app.loadImage("img/Victory.png");
+		Defeat = app.loadImage("img/Defeat.png");
 	}
 	
 	 public abstract void draw ();
