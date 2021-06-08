@@ -1,6 +1,7 @@
 package view;
 
 import controlP5.ControlP5;
+import controller.Controller;
 import processing.core.PApplet;
 
 public class Main extends PApplet {
@@ -23,11 +24,12 @@ public class Main extends PApplet {
 	ResultScreen result;
 	VictoryScreen victory;
 	DefeatScreen defeat;
-
+	Controller c;
 	public int screen;
 
 	@Override
 	public void setup() {
+		c = new Controller(this);
 		name = new NameScreen(this);
 		home = new HomeScreen(this);
 		score = new ScoreScreen(this);
@@ -61,6 +63,7 @@ public class Main extends PApplet {
 			break;
 		// Nivel1
 		case 2:
+			c.drawChar();
 			game1.draw();
 			break;
 		// Nivel2

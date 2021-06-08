@@ -13,9 +13,15 @@ public class Logic {
 	private ByScore sortByScore;
 	private ByDate sortByDate;
 	private ByTime sortByTime;
+	private Character Lucas;
 	
 	public Logic(PApplet app) {
 		this.app = app;
-		
+		playerList = new LinkedList<Player>();
+		Lucas = new Character(0,0,app);
+	}
+	
+	public void drawChar(){
+	Lucas.draw();
 	}
 }
