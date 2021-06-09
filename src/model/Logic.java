@@ -29,7 +29,12 @@ public class Logic {
 	private ByName sortByName;
 	private ByDate sortByDate;
 	private ByTime sortByTime;
+	private MainCharacter[][] matrix;
 	private MainCharacter Lucas;
+	private int cordX;
+	private int cordY;
+	private int posX;
+	private int posY;
 	NameScreen name;
 	HomeScreen home;
 	ScoreScreen score;
@@ -53,7 +58,12 @@ public class Logic {
 		playerList = new LinkedList<Player>();
 		gamesList = new LinkedList<Game>();
 		lucasimg = app.loadImage("img/Lucas.png");
-		Lucas = new MainCharacter(12,520,lucasimg,app);
+		cordX = 7;
+		cordY = 0;
+		posX = 0;
+		posY = 0;
+		matrix = new MainCharacter[9][19];
+		//Lucas = new MainCharacter(posX,posY,lucasimg,app);
 		name = new NameScreen(app);
 		home = new HomeScreen(app);
 		score = new ScoreScreen(app);
@@ -65,9 +75,11 @@ public class Logic {
 		defeat = new DefeatScreen(app);
 		name.textFields();
 		screen = 0;
-		date = new Date();	
-		
+		date = new Date();
+		calcPos();
+		createLucas();
 	}
+	
 	public void changeScreen() {
 		switch (screen) {
 		// Name
@@ -131,9 +143,38 @@ public class Logic {
 			break;
 		}
 	}
-	public void drawChar(){
-	Lucas.draw();
+	
+	public void calcPos() {
+		posX = (cordY*60)+12;
+		posY = (cordX*60)+100;
 	}
+	
+	public void createLucas() {
+		matrix[7][0] = new MainCharacter(posX,posY,lucasimg,app);
+	}
+	
+	public void findLucas() {
+		for(int x = 0; x < 10; x++) {
+			for(int y = 0; y < 20; y++) {
+				if(matrix[x][y] != null) {
+					cordX = x;
+					cordY = y;
+				}
+			}
+		}
+	}
+	
+	public void drawChar(){
+		try {
+			if(matrix[cordX][cordY] != null) {
+				matrix[cordX][cordY].draw();
+			}
+		}
+		catch(Exception e) {
+			e.getLocalizedMessage();
+		}
+	}
+	
 	public void mousePressed() {
 		switch(screen) {
 		case 0:
