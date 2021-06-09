@@ -53,7 +53,7 @@ public class Logic {
 		playerList = new LinkedList<Player>();
 		gamesList = new LinkedList<Game>();
 		lucasimg = app.loadImage("img/Lucas.png");
-		Lucas = new MainCharacter(100,100,lucasimg,app);
+		Lucas = new MainCharacter(12,520,lucasimg,app);
 		name = new NameScreen(app);
 		home = new HomeScreen(app);
 		score = new ScoreScreen(app);
