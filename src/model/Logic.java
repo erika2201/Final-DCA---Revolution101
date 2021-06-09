@@ -159,7 +159,13 @@ public class Logic {
 			}
 			
 			break;
-		}
+		case 1:
+			
+			if((372<app.mouseX&&app.mouseX<801)&&(458<app.mouseY&&app.mouseY<522)) {
+			screen=2;
+			}
+			break;
+			}
 	}
 	public void registerPlayer() {
 		playerList.add(new Player(name.getName(),date,app));
