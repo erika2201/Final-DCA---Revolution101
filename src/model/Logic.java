@@ -55,7 +55,7 @@ public class Logic {
 		victory = new VictoryScreen(app);
 		defeat = new DefeatScreen(app);
 		name.textFields();
-		screen = 0;
+		screen = 5;
 		date = new Date();	
 	}
 	public void changeScreen() {
@@ -160,10 +160,51 @@ public class Logic {
 			
 			break;
 		case 1:
-			
+			//De home a puntajes
+			if((372<app.mouseX&&app.mouseX<801)&&(332<app.mouseY&&app.mouseY<400)) {
+				screen=8;
+				}
+			//De home a Game1
 			if((372<app.mouseX&&app.mouseX<801)&&(458<app.mouseY&&app.mouseY<522)) {
 			screen=2;
 			}
+			break;
+		case 5:
+			//De Resumen a Home
+			if((641<app.mouseX&&app.mouseX<1068)&&(301<app.mouseY&&app.mouseY<372)) {
+				screen=1;
+				}
+			//De Resumen a Game1
+			if((641<app.mouseX&&app.mouseX<1068)&&(428<app.mouseY&&app.mouseY<495)) {
+				screen=2;
+				}
+			
+			break;
+		case 6:
+			//De Victoria a Resumen
+			if((641<app.mouseX&&app.mouseX<1068)&&(301<app.mouseY&&app.mouseY<372)) {
+				screen=5;
+				}
+			//De Victoria a Home
+			if((641<app.mouseX&&app.mouseX<1068)&&(428<app.mouseY&&app.mouseY<495)) {
+				screen=1;
+				}
+			break;
+		case 7:
+			//De Derrota a Resumen
+			if((641<app.mouseX&&app.mouseX<1068)&&(301<app.mouseY&&app.mouseY<372)) {
+				screen=5;
+				}
+			//De Derrota a Home
+			if((641<app.mouseX&&app.mouseX<1068)&&(428<app.mouseY&&app.mouseY<495)) {
+				screen=1;
+				}
+			break;
+		case 8:
+			//De puntajes a home
+			if((22<app.mouseX&&app.mouseX<96)&&(29<app.mouseY&&app.mouseY<62)) {
+				screen=1;
+				}
 			break;
 			}
 	}
