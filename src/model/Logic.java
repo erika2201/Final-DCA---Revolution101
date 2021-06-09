@@ -39,6 +39,10 @@ public class Logic {
 	VictoryScreen victory;
 	DefeatScreen defeat;
 	Date date;
+	int timer = 0;
+	int countsec = 0;
+	int countmin = 0;
+	int sec;
 
 	public int screen;
 	
@@ -74,6 +78,22 @@ public class Logic {
 			break;
 		// Nivel1
 		case 2:
+			//Para calcular el tiempo
+			sec = PApplet.second();
+			if (sec > timer) {
+				timer = sec;
+				countsec++;
+			}
+			if (sec > 60) {
+				sec = 0;
+				
+			}
+			if (countsec >= 60) {
+				countmin++;
+			}
+			app.fill(238, 19, 19);
+			app.textSize(25);
+			app.text(countmin + ":" + countsec, 65, 38);
 			game1.draw();
 			drawChar();
 			break;
