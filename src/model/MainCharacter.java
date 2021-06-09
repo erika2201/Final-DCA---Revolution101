@@ -21,6 +21,5 @@ public void draw() {
 	//app.imageMode(PConstants.CORNER);
 	//System.out.println("entra a draw");
 	app.image(Lucas, posX, posY);
-	
-}
+	}
 }
