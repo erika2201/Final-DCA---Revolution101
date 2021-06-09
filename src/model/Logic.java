@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import exception.NameLength;
 import exception.NoName;
 import processing.core.PApplet;
+import processing.core.PImage;
 import view.DefeatScreen;
 import view.Game1Screen;
 import view.Game2Screen;
@@ -43,6 +44,7 @@ public class Logic {
 	int countsec = 0;
 	int countmin = 0;
 	int sec;
+	PImage lucasimg;
 
 	public int screen;
 	
@@ -50,7 +52,8 @@ public class Logic {
 		this.app = app;
 		playerList = new LinkedList<Player>();
 		gamesList = new LinkedList<Game>();
-		Lucas = new MainCharacter(app.width,app.height,app);
+		lucasimg = app.loadImage("img/Lucas.png");
+		Lucas = new MainCharacter(app.width,app.height,lucasimg,app);
 		name = new NameScreen(app);
 		home = new HomeScreen(app);
 		score = new ScoreScreen(app);
@@ -63,6 +66,7 @@ public class Logic {
 		name.textFields();
 		screen = 0;
 		date = new Date();	
+		
 	}
 	public void changeScreen() {
 		switch (screen) {
@@ -94,6 +98,7 @@ public class Logic {
 			app.fill(238, 19, 19);
 			app.textSize(25);
 			app.text(countmin + ":" + countsec, 65, 38);
+			//Dibujar personaje y fondo
 			game1.draw();
 			drawChar();
 			break;

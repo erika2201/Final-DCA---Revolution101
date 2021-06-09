@@ -8,18 +8,19 @@ public class MainCharacter {
 	private int posX;
 	private int posY;
 	private boolean fail;
-	PImage img;
+	PImage Lucas;
 	PApplet app;
-public MainCharacter(int posX,int posY,PApplet app) {
+public MainCharacter(int posX,int posY, PImage Lucas, PApplet app) {
 	this.posX= posX;
 	this.posY=posY;
+	this.Lucas = Lucas;
 	this.app=app;
-	img = app.loadImage("img/Lucas.png");
+	
 }
 public void draw() {
 	//app.imageMode(PConstants.CORNER);
-	
-	app.image(img, posX, posY);
+	//System.out.println("entra a draw");
+	app.image(Lucas, posX, posY);
 	
 }
 }
