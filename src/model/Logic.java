@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -23,8 +24,8 @@ public class Logic {
 	private PApplet app;
 	private LinkedList<Player> playerList;
 	private ArrayList<Enemy> enemyList;
+	private LinkedList<Game> gamesList;
 	private ByName sortByName;
-	private ByScore sortByScore;
 	private ByDate sortByDate;
 	private ByTime sortByTime;
 	private MainCharacter Lucas;
@@ -44,6 +45,7 @@ public class Logic {
 	public Logic(PApplet app) {
 		this.app = app;
 		playerList = new LinkedList<Player>();
+		gamesList = new LinkedList<Game>();
 		Lucas = new MainCharacter(app.width,app.height,app);
 		name = new NameScreen(app);
 		home = new HomeScreen(app);
@@ -55,7 +57,7 @@ public class Logic {
 		victory = new VictoryScreen(app);
 		defeat = new DefeatScreen(app);
 		name.textFields();
-		screen = 5;
+		screen = 8;
 		date = new Date();	
 	}
 	public void changeScreen() {
@@ -172,7 +174,7 @@ public class Logic {
 		case 5:
 			//De Resumen a Home
 			if((641<app.mouseX&&app.mouseX<1068)&&(301<app.mouseY&&app.mouseY<372)) {
-				screen=1;
+				screen=5;
 				}
 			//De Resumen a Game1
 			if((641<app.mouseX&&app.mouseX<1068)&&(428<app.mouseY&&app.mouseY<495)) {
@@ -205,10 +207,31 @@ public class Logic {
 			if((22<app.mouseX&&app.mouseX<96)&&(29<app.mouseY&&app.mouseY<62)) {
 				screen=1;
 				}
+			//Ordenar por nombre
+			if((101<app.mouseX&&app.mouseX<299)&&(199<app.mouseY&&app.mouseY<243)) {
+			Collections.sort(gamesList,sortByName);
+			System.out.println("ordenar por nombre");
+			}
+			//Ordenar por puntaje (ORDENAMIENTO NATURAL)
+			if((349<app.mouseX&&app.mouseX<547)&&(199<app.mouseY&&app.mouseY<243)) {
+				
+				Collections.sort(gamesList);
+				System.out.println("ordenar por puntaje");
+				}
+			//Ordenar por fecha
+			if((597<app.mouseX&&app.mouseX<796)&&(199<app.mouseY&&app.mouseY<243)) {
+				Collections.sort(gamesList,sortByDate);
+				System.out.println("ordenar por fecha");
+				}
+			//Ordenar por tiempo
+			if((847<app.mouseX&&app.mouseX<1045)&&(199<app.mouseY&&app.mouseY<243)) {
+				Collections.sort(gamesList,sortByTime);
+				System.out.println("ordenar por tiempo");
+				}
 			break;
 			}
 	}
 	public void registerPlayer() {
-		playerList.add(new Player(name.getName(),date,app));
+		playerList.add(new Player(name.getName(),app));
 	}
 }
