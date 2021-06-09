@@ -61,7 +61,7 @@ public class Logic {
 		victory = new VictoryScreen(app);
 		defeat = new DefeatScreen(app);
 		name.textFields();
-		screen = 8;
+		screen = 0;
 		date = new Date();	
 	}
 	public void changeScreen() {

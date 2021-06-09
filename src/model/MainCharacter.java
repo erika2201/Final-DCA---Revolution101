@@ -18,7 +18,8 @@ public MainCharacter(int posX,int posY,PApplet app) {
 }
 public void draw() {
 	//app.imageMode(PConstants.CORNER);
-	app.image(img, posX, posY,100,100);
+	
+	app.image(img, posX, posY);
 	
 }
 }
