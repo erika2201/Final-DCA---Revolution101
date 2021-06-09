@@ -11,8 +11,14 @@ public class Controller {
 		this.app = app;
 		l = new Logic(app);
 	}
+	public void changeScreen() {
+		l.changeScreen();
+	}
 	public void drawChar() {
 		l.drawChar();
+	}
+	public void mousePressed() {
+		l.mousePressed();
 	}
 }
 

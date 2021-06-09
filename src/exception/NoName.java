@@ -1,9 +1,15 @@
 package exception;
 
-public class NoName {
+public class NoName extends Exception {
 
-	public NoName() {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public NoName(String message) {
 		// TODO Auto-generated constructor stub
+	super(message);
 	}
 
 }
