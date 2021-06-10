@@ -14,5 +14,9 @@ public class Player {
 		this.app = app;
 	
 	}
+	public String getName() {
+		return name;
+	}
+
 	
 }

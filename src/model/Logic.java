@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -54,6 +55,7 @@ public class Logic {
 	VictoryScreen victory;
 	DefeatScreen defeat;
 	Date date;
+	SimpleDateFormat datePrintter;
 	int timer;
 	int countsec;
 	int countmin;
@@ -95,7 +97,7 @@ public class Logic {
 		name.textFields();
 		screen = 0;
 		date = new Date();
-		
+		datePrintter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		
 		
 		
@@ -103,7 +105,7 @@ public class Logic {
 	}
 	
 	public void changeScreen() {
-		
+		System.out.println(gamesList.size());
 		switch (screen) {
 		// Name
 		case 0:
@@ -147,7 +149,8 @@ public class Logic {
 			
 			drawMedical1();
 			deleteMedical1();
-			
+			app.fill(238,19,19);
+			app.textSize(25);
 			app.createFont("arial",16);
 			app.text(scores, 1100, 20);
 			
@@ -233,14 +236,14 @@ public class Logic {
 			drawFloor3();
 			winScreen();
 			lose();
-			
+			/*
 			System.out.println("");
 			System.out.println("-----------------------------------------------------------------------");
 			System.out.println("");
 			System.out.println("X: " + cordY);
 			System.out.println("");
 			System.out.println("Y: " + cordX);
-			
+			*/
 			
 			break;
 		// Resumen del juego
@@ -258,6 +261,14 @@ public class Logic {
 		// Lista de puntajes	
 		case 8:
 			score.draw();
+			for (int i = 0; i < gamesList.size(); i++) {
+				app.fill(238,19,19);
+				app.textSize(20);
+				app.text(gamesList.get(i).getPlayName(), 137, 292+(30*(i)));
+				app.text(gamesList.get(i).getScore(), 383, 292+(30*(i)));
+				app.text(datePrintter.format(gamesList.get(i).getDate()), 597, 292+(30*(i)));
+				app.text(gamesList.get(i).getTime(), 897, 292+(30*(i)));
+			}
 			break;
 
 		default:
@@ -797,12 +808,14 @@ public class Logic {
 		}
 		if(screen==4&&cordX==3&&cordY==18) {
 			screen=6;
+			registerGame();
 		}
 
 	}
 	public void lose() {
 		if(cordX>=8) {
 			screen=7;
+			registerGame();
 		}
 	}
 	
@@ -874,7 +887,7 @@ public class Logic {
 		case 5:
 			//De Resumen a Home
 			if((641<app.mouseX&&app.mouseX<1068)&&(301<app.mouseY&&app.mouseY<372)) {
-				screen=5;
+				screen=1;
 				}
 			//De Resumen a Game1
 			if((641<app.mouseX&&app.mouseX<1068)&&(428<app.mouseY&&app.mouseY<495)) {
@@ -936,5 +949,9 @@ public class Logic {
 	}
 	public void registerPlayer() {
 		playerList.add(new Player(name.getName(),app));
+	}
+	public void  registerGame() {
+		date = new Date();
+		gamesList.add(new Game(playerList.get(playerList.size()-1).getName(),scores,countmin + ":" + countsec,date,app));
 	}
 }
