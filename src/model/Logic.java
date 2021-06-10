@@ -41,7 +41,9 @@ public class Logic {
 	private boolean coin2;
 	private boolean medicine1;
 	private boolean medicine2;
-	private boolean sumScore;
+	private boolean firstPaint;
+	private boolean secondPaint;
+	private boolean thirdPaint;
 	NameScreen name;
 	HomeScreen home;
 	ScoreScreen score;
@@ -52,9 +54,9 @@ public class Logic {
 	VictoryScreen victory;
 	DefeatScreen defeat;
 	Date date;
-	int timer = 0;
-	int countsec = 0;
-	int countmin = 0;
+	int timer;
+	int countsec;
+	int countmin;
 	int sec;
 	int scores; //la instancia de ScoreScreen se llama score
 	PImage lucasimg;
@@ -69,15 +71,14 @@ public class Logic {
 		playerList = new LinkedList<Player>();
 		gamesList = new LinkedList<Game>();
 		lucasimg = app.loadImage("img/Lucas.png");
-		cordX = 6;
-		cordY = 0;
-		posX = 0;
-		posY = 0;
+		
 		coin1 = true;
 		coin2 = true;
 		medicine1 = true;
 		medicine2 = true;
-		sumScore = false;
+		firstPaint = true;
+		secondPaint = true;
+		thirdPaint = true;
 		matrix = new MainCharacter[9][19];
 		barrier = new int[9][19];
 		coins = new Coin[9][19];
@@ -94,11 +95,9 @@ public class Logic {
 		name.textFields();
 		screen = 0;
 		date = new Date();
-		calcPos();
-		createLucas();
-		createCoins1();
-		createMedical1();
-		scores = 0;
+		
+		
+		
 		
 	
 	}
@@ -118,24 +117,27 @@ public class Logic {
 			break;
 		// Nivel1
 		case 2:
+			
+			if(firstPaint) {
+				cordX = 6;
+				cordY = 0;
+				posX = 0;
+				posY = 0;
+				calcPos();
+				createLucas();
+				createCoins1();
+				createMedical1();
+				drawFloor1();
+				scores = 0;
+				timer=0;
+				countsec=0;
+				countmin=0;
+				firstPaint=false;
+			}
 			game1.draw();
-			//Para calcular el tiempo
-			sec = PApplet.second();
-			if (sec > timer) {
-				timer = sec;
-				countsec++;
-			}
-			if (sec > 60) {
-				sec = 0;
-				
-			}
-			if (countsec >= 60) {
-				countmin++;
-			}
-			app.fill(238,19,19);
-			app.textSize(25);
-			app.text(countmin + ":" + countsec, 905, 20);
-			System.out.println(countmin + ":" + countsec);
+			//Activar cronometro
+			Chrono();
+			
 			//Dibujar personaje y fondo
 		
 			
@@ -148,24 +150,57 @@ public class Logic {
 			
 			app.createFont("arial",16);
 			app.text(scores, 1100, 20);
-			//scores();
 			
 			drawChar();
 			drawFloor1();
+			winScreen();
+			lose();
 			
-			/*
 			System.out.println("");
 			System.out.println("-----------------------------------------------------------------------");
 			System.out.println("");
 			System.out.println("X: " + cordY);
 			System.out.println("");
 			System.out.println("Y: " + cordX);
-			*/
+			
 			
 			break;
 		// Nivel2
 		case 3:
+			if(secondPaint) {
+				cordX = 6;
+				cordY = 0;
+				posX = 0;
+				posY = 0;
+				calcPos();
+				createLucas();
+				createCoins1();
+				createMedical1();
+				secondPaint=false;
+			}
 			game2.draw();
+			Chrono();
+			drawCoins2();
+			deleteCoin2();
+			
+			drawMedical2();
+			deleteMedical2();
+			
+			app.createFont("arial",16);
+			app.text(scores, 1100, 20);
+			
+			drawChar();
+			drawFloor2();
+			winScreen();
+			lose();
+			
+			System.out.println("");
+			System.out.println("-----------------------------------------------------------------------");
+			System.out.println("");
+			System.out.println("X: " + cordY);
+			System.out.println("");
+			System.out.println("Y: " + cordX);
+			
 			
 			break;
 		// Nivel3
@@ -194,7 +229,25 @@ public class Logic {
 			break;
 		}
 	}
-	
+	//=============================================================//
+	public void Chrono() {
+		//Para calcular el tiempo
+		sec = PApplet.second();
+		if (sec > timer) {
+			timer = sec;
+			countsec++;
+		}
+		if (sec > 60) {
+			sec = 0;
+			
+		}
+		if (countsec >= 60) {
+			countmin++;
+		}
+		app.fill(238,19,19);
+		app.textSize(25);
+		app.text(countmin + ":" + countsec, 905, 20);
+	}
 	//=============================================================//
 	
 	public void calcPos() {
@@ -487,6 +540,12 @@ public class Logic {
 }
 	
 	public void drawFloor1() {
+		//Vaciar el array antes de dibujar las paredes para eliminar paredes de otros niveles
+		for (int i = 0; i < barrier.length; i++) { 
+            for (int j = 0; j < barrier[i].length; j++) {
+            	barrier[i][j]= 0;
+            	}
+            }
 		barrier[7][0] = 1;
 		barrier[7][1] = 1;
 		barrier[7][2] = 1;
@@ -525,6 +584,12 @@ public class Logic {
 	}
 	
 	public void drawFloor2() {
+		//Vaciar el array antes de dibujar las paredes para eliminar paredes de otros niveles
+				for (int i = 0; i < barrier.length; i++) { 
+		            for (int j = 0; j < barrier[i].length; j++) {
+		            	barrier[i][j]= 0;
+		            	}
+		            }
 		barrier[3][0] = 1;
 		barrier[3][1] = 1;
 		barrier[3][5] = 1;
@@ -533,6 +598,7 @@ public class Logic {
 		barrier[4][5] = 1;
 		barrier[4][6] = 1;
 		
+		barrier[5][4] = 1;
 		barrier[5][5] = 1;
 		barrier[5][6] = 1;
 		barrier[5][17] = 1;
@@ -567,6 +633,12 @@ public class Logic {
 		}
 	
 	public void drawFloor3() {
+		//Vaciar el array antes de dibujar las paredes para eliminar paredes de otros niveles
+				for (int i = 0; i < barrier.length; i++) { 
+		            for (int j = 0; j < barrier[i].length; j++) {
+		            	barrier[i][j]= 0;
+		            	}
+		            }
 		barrier[1][10] = 1;
 
 		barrier[2][2] = 1;
@@ -608,6 +680,7 @@ public class Logic {
 	
 	public void moveL() {
 		try {
+			
 			if(cordY - 1 > -1) {
 				if(barrier[cordX][cordY - 1] != 1) {
 					cordY -= 1;
@@ -623,6 +696,7 @@ public class Logic {
 	}
 	
 	public void moveR() {
+		
 		try {
 			if(cordY + 1 < 20) {
 				if(barrier[cordX][cordY + 1] != 1) {
@@ -663,6 +737,18 @@ public class Logic {
 		}
 		catch(Exception e) {
 			e.getLocalizedMessage();
+		}
+	}
+	public void winScreen() {
+		//Condicion de Cambio de pantalla
+		if(screen==2&&cordX==6&&cordY==18) {
+			screen=3;
+		}
+
+	}
+	public void lose() {
+		if(cordX>=8) {
+			screen=7;
 		}
 	}
 	
@@ -725,6 +811,7 @@ public class Logic {
 				}
 			//De home a Game1
 			if((372<app.mouseX&&app.mouseX<801)&&(458<app.mouseY&&app.mouseY<522)) {
+			firstPaint=true;
 			screen=2;
 			}
 			break;
@@ -735,6 +822,7 @@ public class Logic {
 				}
 			//De Resumen a Game1
 			if((641<app.mouseX&&app.mouseX<1068)&&(428<app.mouseY&&app.mouseY<495)) {
+				firstPaint=true;
 				screen=2;
 				}
 			
