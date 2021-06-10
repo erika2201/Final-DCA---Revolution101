@@ -255,6 +255,8 @@ public class Logic {
 		// Resumen del juego
 		case 5:
 			result.draw();
+			app.text(gamesList.get(gamesList.size()-1).getScore(),365,389);
+			app.text(gamesList.get(gamesList.size()-1).getTime()+" segundos",365,447);
 			break;
 		// Pantalla de victoria
 		case 6:
@@ -277,10 +279,8 @@ public class Logic {
 				app.text(gamesList.get(i).getPlayName(), 137, 292+(30*(i)));
 				app.text(gamesList.get(i).getScore(), 383, 292+(30*(i)));
 				app.text(datePrintter.format(gamesList.get(i).getDate()), 597, 292+(30*(i)));
+				/*
 				String tiempo = String.valueOf(gamesList.get(i).getTime());
-				//System.out.println(tiempo);
-			
-				
 				if(tiempo.length()==2) {
 				time1=tiempo.substring(0,1);
 				time2=tiempo.substring(1,2);
@@ -288,7 +288,8 @@ public class Logic {
 				time1=tiempo.substring(0,1);
 				time2=tiempo.substring(1,3);
 				}
-				app.text(time1+":"+time2, 897, 292+(30*(i)));
+				*/
+				app.text(gamesList.get(i).getTime()+" segundos", 897, 292+(30*(i)));
 			}
 			break;
 
