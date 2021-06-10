@@ -62,6 +62,8 @@ public class Logic {
 	int sec;
 	int scores; //la instancia de ScoreScreen se llama score
 	PImage lucasimg;
+	String time1;
+	String time2;
 
 	public int screen;
 	//Recolectables
@@ -96,16 +98,20 @@ public class Logic {
 		defeat = new DefeatScreen(app);
 		name.textFields();
 		screen = 0;
+		time1="";
+		time2="";
 		date = new Date();
 		datePrintter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		
+		sortByName= new ByName();
+		sortByDate= new ByDate();
+		sortByTime= new ByTime();
 		
 		
 	
 	}
 	
 	public void changeScreen() {
-		System.out.println(gamesList.size());
+		//
 		switch (screen) {
 		// Name
 		case 0:
@@ -260,6 +266,10 @@ public class Logic {
 			break;
 		// Lista de puntajes	
 		case 8:
+		//	System.out.println(gamesList.get(0).getPlayName());
+		//	System.out.println(gamesList.get(0).getScore());
+		//	System.out.println(gamesList.get(0).getDate());
+		//	System.out.println(gamesList.get(0).getTime());
 			score.draw();
 			for (int i = 0; i < gamesList.size(); i++) {
 				app.fill(238,19,19);
@@ -267,7 +277,18 @@ public class Logic {
 				app.text(gamesList.get(i).getPlayName(), 137, 292+(30*(i)));
 				app.text(gamesList.get(i).getScore(), 383, 292+(30*(i)));
 				app.text(datePrintter.format(gamesList.get(i).getDate()), 597, 292+(30*(i)));
-				app.text(gamesList.get(i).getTime(), 897, 292+(30*(i)));
+				String tiempo = String.valueOf(gamesList.get(i).getTime());
+				//System.out.println(tiempo);
+			
+				
+				if(tiempo.length()==2) {
+				time1=tiempo.substring(0,1);
+				time2=tiempo.substring(1,2);
+				}else if(tiempo.length()==3){
+				time1=tiempo.substring(0,1);
+				time2=tiempo.substring(1,3);
+				}
+				app.text(time1+":"+time2, 897, 292+(30*(i)));
 			}
 			break;
 
@@ -952,6 +973,10 @@ public class Logic {
 	}
 	public void  registerGame() {
 		date = new Date();
-		gamesList.add(new Game(playerList.get(playerList.size()-1).getName(),scores,countmin + ":" + countsec,date,app));
+		 String s1= String.valueOf(countmin);
+		 String s2= String.valueOf(countsec);
+		 String s3 = s1+s2;
+		System.out.println(s3);
+		gamesList.add(new Game(playerList.get(playerList.size()-1).getName(),scores,Integer.parseInt(s3),date,app));
 	}
 }

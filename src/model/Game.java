@@ -7,10 +7,10 @@ import processing.core.PApplet;
 public class Game implements Comparable<Game> {
 	private String playName;
 	private int score;
-	private String time;
+	private int time;
 	private Date date;
 	PApplet app;
-	public Game(String playName, int score, String time, Date date, PApplet app) {
+	public Game(String playName, int score, int time, Date date, PApplet app) {
 		this.playName = playName;
 		this.score = score;
 		this.time = time;
@@ -20,7 +20,7 @@ public class Game implements Comparable<Game> {
 	@Override
 	public int compareTo(Game nextGame) {
 
-		return this.score - nextGame.getScore();
+		return nextGame.getScore() - this.score;
 	}
 	public String getPlayName() {
 		return playName;
@@ -28,7 +28,7 @@ public class Game implements Comparable<Game> {
 	public int getScore() {
 		return score;
 	}
-	public String getTime() {
+	public int getTime() {
 		return time;
 	}
 	public Date getDate() {
