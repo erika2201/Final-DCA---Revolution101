@@ -61,8 +61,7 @@ public class Logic {
 
 	public int screen;
 	//Recolectables
-	ArrayList<Coin> coinCol;
-	ArrayList<Medicine> medCol;
+	
 	
 	
 	public Logic(PApplet app) {
@@ -97,14 +96,15 @@ public class Logic {
 		date = new Date();
 		calcPos();
 		createLucas();
+		createCoins1();
+		createMedical1();
 		scores = 0;
 		
-		//Recolectables
-		coinCol = new ArrayList<Coin>();
-		medCol = new ArrayList<Medicine>();
+	
 	}
 	
 	public void changeScreen() {
+		
 		switch (screen) {
 		// Name
 		case 0:
@@ -137,17 +137,16 @@ public class Logic {
 			//Dibujar personaje y fondo
 			game1.draw();
 			
-			createCoins1();
+			
 			drawCoins1();
 			deleteCoin1();
 			
-			createMedical1();
 			drawMedical1();
 			deleteMedical1();
 			
 			app.createFont("arial",16);
 			app.text(scores, 1100, 20);
-			scores();
+			//scores();
 			
 			drawChar();
 			drawFloor1();
@@ -165,12 +164,12 @@ public class Logic {
 		// Nivel2
 		case 3:
 			game2.draw();
-			collectable();
+			
 			break;
 		// Nivel3
 		case 4:
 			game3.draw();
-			collectable();
+		
 			break;
 		// Resumen del juego
 		case 5:
@@ -238,17 +237,17 @@ public class Logic {
 	//=============================================================//
 	
 	public void createCoins1() { //Crear Monedas Nivel 1
-		coins[1][17] = new Coin(1040, 223, app);
+		coins[1][17] = new Coin(1040, 223,42, app);
 	}
 	
 	public void createCoins2() { //Crear Monedas Nivel 2
-		coins[7][8] = new Coin(500, 595, app);
-		coins[4][18] = new Coin(1100, 413, app);
+		coins[7][8] = new Coin(500, 595,42, app);
+		coins[4][18] = new Coin(1100, 413,42, app);
 	}
 	
 	public void createCoins3() { //Crear Monedas Nivel 3
-		coins[7][4] = new Coin(263, 593, app);
-		coins[0][10] = new Coin(616, 179, app);
+		coins[7][4] = new Coin(263, 593,42, app);
+		coins[0][10] = new Coin(616, 179,42, app);
 	}
 	
 	//=============================================================//
@@ -256,18 +255,18 @@ public class Logic {
 	//=============================================================//
 	
 	public void createMedical1() { //Crear Suministros Nivel 1
-		medicines[2][4] = new Medicine(270, 300, app);
-		medicines[2][12] = new Medicine(750, 300, app);
+		medicines[2][4] = new Medicine(270, 300,39, app);
+		medicines[2][12] = new Medicine(750, 300,39, app);
 	}
 	
 	public void createMedical2() { //Crear Suministros Nivel 2
-		medicines[2][0] = new Medicine(30, 300, app);
-		medicines[5][11] = new Medicine(690, 480, app);
+		medicines[2][0] = new Medicine(30, 300,39, app);
+		medicines[5][11] = new Medicine(690, 480,39, app);
 	}
 	
 	public void createMedical3() { //Crear Suministros Nivel 3
-		medicines[4][6] = new Medicine(390, 420, app);
-		medicines[6][13] = new Medicine(810, 540, app);
+		medicines[4][6] = new Medicine(390, 420,39, app);
+		medicines[6][13] = new Medicine(810, 540,39, app);
 	}
 	
 	//=============================================================//
@@ -357,15 +356,23 @@ public class Logic {
 	
 	@SuppressWarnings("static-access")
 	public void deleteCoin1() {	//Borrar Monedas Nivel 1
-		int dist = 0;
 		
-		dist = (int) app.dist(cordX, cordY, 1, 17);
+		for (int i = 0; i < coins.length; i++) { 
+            for (int j = 0; j < coins[i].length; j++) {
+            	float dist =  (float) app.dist(posX, posY, coins[1][17].getPosX(),coins[1][17].getPosY());
+            	//System.out.println(dist);
+        		if(dist <= 11) {
+  
+        			coins[1][17].setPosX(725);
+        			coins[1][17].setPosY(10);
+        			coins[1][17].setSize(21);
+        			scoreCoin();
+        		} 
+            }
+          
+        }
 		
-		if(dist < 1) {
-			coins[1][17] = null;
-			coin1 = false;
-			//sumScore = true;
-		}
+		
 	}
 	
 	@SuppressWarnings("static-access")
@@ -459,15 +466,12 @@ public class Logic {
 	
 	//=============================================================//
 	
-	public void scores() {
-		System.err.println(sumScore);
-		if(coin1==false) {
-			sumScore=true;
-		}
-			if (sumScore) {
-				scores +=1;
-					sumScore=false;
-			}
+	public void scoreCoin() {
+		
+		
+				scores =scores+100;
+					
+	
 		
 	}
 	
@@ -589,25 +593,7 @@ public class Logic {
 		barrier[8][13] = 1;
 	}
 	
-	public void collectable() {
-		switch (screen) {
-		case 2:
-						
-			break;
-		case 3:
-			
-			medCol.add(new Medicine(685, 473, app));
-			
-			break;
-		case 4:
-			medCol.add(new Medicine(375, 412, app));
-			medCol.add(new Medicine(797, 534, app));
-			
-			break;
-		default:
-			break;
-		}
-	}
+
 	
 	public void moveL() {
 		try {
