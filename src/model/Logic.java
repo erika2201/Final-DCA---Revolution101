@@ -118,6 +118,7 @@ public class Logic {
 			break;
 		// Nivel1
 		case 2:
+			game1.draw();
 			//Para calcular el tiempo
 			sec = PApplet.second();
 			if (sec > timer) {
@@ -131,11 +132,12 @@ public class Logic {
 			if (countsec >= 60) {
 				countmin++;
 			}
-			app.fill(238, 19, 19);
+			app.fill(238,19,19);
 			app.textSize(25);
-			app.text(countmin + ":" + countsec, 65, 38);
+			app.text(countmin + ":" + countsec, 905, 20);
+			System.out.println(countmin + ":" + countsec);
 			//Dibujar personaje y fondo
-			game1.draw();
+		
 			
 			
 			drawCoins1();
@@ -363,7 +365,7 @@ public class Logic {
             	//System.out.println(dist);
         		if(dist <= 11) {
   
-        			coins[1][17].setPosX(725);
+        			coins[1][17].setPosX(765);
         			coins[1][17].setPosY(10);
         			coins[1][17].setSize(21);
         			scoreCoin();
@@ -414,20 +416,31 @@ public class Logic {
 	//=============================================================//
 	
 	@SuppressWarnings("static-access")
-	public void deleteMedical1() {	//Borrar Suministros Nivel 1
-		int dist1 = 0;
-		int dist2 = 0;
+	public void deleteMedical1() {
+		//Borrar Suministros Nivel 1
+		for (int i = 0; i < medicines.length; i++) { 
+            for (int j = 0; j < medicines[i].length; j++) {
+            	float dist1 =  (float) app.dist(posX, posY, medicines[2][4].getPosX(),medicines[2][4].getPosY());
+            	float dist2 =  (float) app.dist(posX, posY, medicines[2][12].getPosX(),medicines[2][12].getPosY());
+            	//System.out.println(dist1);
+        		if(dist1 <= 20) {
+  
+        			medicines[2][4].setPosX(725);
+        			medicines[2][4].setPosY(10);
+        			medicines[2][4].setSize(19);
+        			scoreMedicine();
+        		} 
+        		if(dist2 <= 20) {
+        			  
+        			medicines[2][12].setPosX(745);
+        			medicines[2][12].setPosY(10);
+        			medicines[2][12].setSize(19);
+        			scoreMedicine();
+        		} 
+            }
+          
+        }
 		
-		dist1 = (int) app.dist(cordX, cordY, 2, 4);
-		dist2 = (int) app.dist(cordX, cordY, 2, 12);
-		
-		if(dist1 < 1) {
-			medicine1 = false;
-		}
-		
-		if(dist2 < 1) {
-			medicine2 = false;
-		}
 	}
 	
 	@SuppressWarnings("static-access")
@@ -467,13 +480,11 @@ public class Logic {
 	//=============================================================//
 	
 	public void scoreCoin() {
-		
-		
-				scores =scores+100;
-					
-	
-		
+				scores =scores+100;		
 	}
+	public void scoreMedicine() {
+		scores =scores+50;		
+}
 	
 	public void drawFloor1() {
 		barrier[7][0] = 1;
