@@ -1,12 +1,23 @@
 package model;
 
-public class Collectable {
-	private int posX;
-	private int posY;
-	private boolean isCollected;
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public abstract class Collectable {
+	protected int posX;
+	protected int posY;
+	protected PApplet app;
 	
-	public Collectable(int posX, int posY) {
+	protected PImage coin, med;
+	
+	public Collectable(int posX, int posY, PApplet app) {
 		this.posX = posX;
 		this.posY = posY;
+		this.app = app;
+		
+		coin = app.loadImage("img/Coin.png");
+		med = app.loadImage("img/Medicine.png");
 	}
+	
+	 public abstract void draw ();
 }

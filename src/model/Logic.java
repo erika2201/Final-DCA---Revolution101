@@ -52,6 +52,10 @@ public class Logic {
 	PImage lucasimg;
 
 	public int screen;
+	//Recolectables
+	ArrayList<Coin> coinCol;
+	ArrayList<Medicine> medCol;
+	
 	
 	public Logic(PApplet app) {
 		this.app = app;
@@ -78,6 +82,9 @@ public class Logic {
 		date = new Date();
 		calcPos();
 		createLucas();
+		//Recolectables
+		coinCol = new ArrayList<Coin>();
+		medCol = new ArrayList<Medicine>();
 	}
 	
 	public void changeScreen() {
@@ -112,16 +119,21 @@ public class Logic {
 			app.text(countmin + ":" + countsec, 65, 38);
 			//Dibujar personaje y fondo
 			game1.draw();
+			collectable(); //recolectables
 			drawChar();
 			drawFloor1();
+			
+				
 			break;
 		// Nivel2
 		case 3:
 			game2.draw();
+			collectable();
 			break;
 		// Nivel3
 		case 4:
 			game3.draw();
+			collectable();
 			break;
 		// Resumen del juego
 		case 5:
@@ -292,6 +304,66 @@ public class Logic {
 		barrier[8][9] = 1;
 		barrier[8][11] = 1;
 		barrier[8][13] = 1;
+	}
+	
+	public void collectable() {
+		switch (screen) {
+		case 2:
+			coinCol.add(new Coin(1040, 233, app));
+			medCol.add(new Medicine(740, 290, app));
+			medCol.add(new Medicine(265, 290, app));
+			
+			//Monedas
+			for (int i = 0; i < coinCol.size(); i++) {
+				coinCol.get(i).draw(); 
+				//Insertar condicional o método para recolectar
+			}
+			
+			//Insumos medicos
+			for (int i = 0; i < medCol.size(); i++) {
+				medCol.get(i).draw(); 
+				//Insertar condicional o método para recolectar
+			}
+			break;
+		case 3:
+			coinCol.add(new Coin(500, 595, app));
+			coinCol.add(new Coin(1100, 413, app));
+			medCol.add(new Medicine(685, 473, app));
+			
+			//Monedas
+			for (int i = 0; i < coinCol.size(); i++) {
+				coinCol.get(i).draw(); 
+				//Insertar condicional o método para recolectar
+			}
+			
+			//Insumos medicos
+			for (int i = 0; i < medCol.size(); i++) {
+				medCol.get(i).draw(); 
+				//Insertar condicional o método para recolectar
+			}
+			break;
+		case 4:
+			coinCol.add(new Coin(263, 593, app));
+			coinCol.add(new Coin(616, 179, app));
+			medCol.add(new Medicine(375, 412, app));
+			medCol.add(new Medicine(797, 534, app));
+			
+			//Monedas
+			for (int i = 0; i < coinCol.size(); i++) {
+				coinCol.get(i).draw(); 
+				//Insertar condicional o método para recolectar
+			}
+			
+			//Insumos medicos
+			for (int i = 0; i < medCol.size(); i++) {
+				medCol.get(i).draw(); 
+				//Insertar condicional o método para recolectar
+			}
+			
+			break;
+		default:
+			break;
+		}
 	}
 	
 	public void moveL() {
