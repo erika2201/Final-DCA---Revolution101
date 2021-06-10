@@ -12,5 +12,4 @@ public class Coin extends Collectable {
 	public void draw() {
 		app.image(coin, posX, posY);
 	}
-
 }

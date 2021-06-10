@@ -31,10 +31,14 @@ public class Logic {
 	private ByTime sortByTime;
 	private MainCharacter[][] matrix;
 	private int[][] barrier;
+	private Coin[][] coins;
+	private Medicine[][] medicines;
 	private int cordX;
 	private int cordY;
 	private int posX;
 	private int posY;
+	private boolean coin1;
+	private boolean coin2;
 	NameScreen name;
 	HomeScreen home;
 	ScoreScreen score;
@@ -66,8 +70,12 @@ public class Logic {
 		cordY = 0;
 		posX = 0;
 		posY = 0;
+		coin1 = true;
+		coin2 = true;
 		matrix = new MainCharacter[9][19];
 		barrier = new int[9][19];
+		coins = new Coin[9][19];
+		medicines = new Medicine[9][19];
 		name = new NameScreen(app);
 		home = new HomeScreen(app);
 		score = new ScoreScreen(app);
@@ -119,11 +127,23 @@ public class Logic {
 			app.text(countmin + ":" + countsec, 65, 38);
 			//Dibujar personaje y fondo
 			game1.draw();
-			collectable(); //recolectables
+			
+			createCoins1();
+			drawCoins1();
+			deleteCoin();
+			
 			drawChar();
 			drawFloor1();
 			
-				
+			/*
+			System.out.println("");
+			System.out.println("-----------------------------------------------------------------------");
+			System.out.println("");
+			System.out.println("X: " + cordY);
+			System.out.println("");
+			System.out.println("Y: " + cordX);
+			*/
+			
 			break;
 		// Nivel2
 		case 3:
@@ -185,6 +205,29 @@ public class Logic {
 		}
 		catch(Exception e) {
 			e.getLocalizedMessage();
+		}
+	}
+	
+	public void createCoins1() {
+		coins[1][17] = new Coin(1040, 223, app);
+	}
+	
+	public void drawCoins1() {
+		if(coins[1][17] != null) {
+			if(coin1) {
+				coins[1][17].draw();
+			}
+		}
+	}
+	
+	@SuppressWarnings("static-access")
+	public void deleteCoin() {
+		int dist = 0;
+		
+		dist = (int) app.dist(cordX, cordY, 1, 17);
+		
+		if(dist < 1) {
+			coin1 = false;
 		}
 	}
 	
@@ -309,21 +352,12 @@ public class Logic {
 	public void collectable() {
 		switch (screen) {
 		case 2:
+			/*
 			coinCol.add(new Coin(1040, 233, app));
 			medCol.add(new Medicine(740, 290, app));
 			medCol.add(new Medicine(265, 290, app));
+			 */
 			
-			//Monedas
-			for (int i = 0; i < coinCol.size(); i++) {
-				coinCol.get(i).draw(); 
-				//Insertar condicional o método para recolectar
-			}
-			
-			//Insumos medicos
-			for (int i = 0; i < medCol.size(); i++) {
-				medCol.get(i).draw(); 
-				//Insertar condicional o método para recolectar
-			}
 			break;
 		case 3:
 			coinCol.add(new Coin(500, 595, app));
@@ -367,7 +401,6 @@ public class Logic {
 	}
 	
 	public void moveL() {
-		System.out.println("move L");
 		try {
 			if(cordY - 1 > -1) {
 				if(barrier[cordX][cordY - 1] != 1) {
