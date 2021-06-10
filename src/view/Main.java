@@ -29,12 +29,26 @@ public class Main extends PApplet {
 		// System.out.println(mouseX+" "+mouseY);
 		c.changeScreen();
 	}
-
-	
-
 	
 	@Override
 	public void mouseClicked() {
 		c.mousePressed();
+	}
+	
+	public void keyPressed() {
+		if(key == CODED) {
+			if(keyCode == UP) {
+				c.moveU();
+			}
+			if(keyCode == RIGHT) {
+				c.moveR();
+			}
+			if(keyCode == LEFT) {
+				c.moveL();
+			}
+			if(keyCode == DOWN) {
+				c.moveD();
+			}
+		}
 	}
 }

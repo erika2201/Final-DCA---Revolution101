@@ -20,5 +20,21 @@ public class Controller {
 	public void mousePressed() {
 		l.mousePressed();
 	}
+	
+	public void moveR() {
+		l.moveR();
+	}
+	
+	public void moveL() {
+		l.moveL();
+	}
+	
+	public void moveU() {
+		l.moveU();
+	}
+	
+	public void moveD() {
+		l.moveD();
+	}
 }
 

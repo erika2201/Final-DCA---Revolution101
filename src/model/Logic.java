@@ -30,7 +30,7 @@ public class Logic {
 	private ByDate sortByDate;
 	private ByTime sortByTime;
 	private MainCharacter[][] matrix;
-	private MainCharacter Lucas;
+	private int[][] barrier;
 	private int cordX;
 	private int cordY;
 	private int posX;
@@ -58,12 +58,12 @@ public class Logic {
 		playerList = new LinkedList<Player>();
 		gamesList = new LinkedList<Game>();
 		lucasimg = app.loadImage("img/Lucas.png");
-		cordX = 7;
+		cordX = 6;
 		cordY = 0;
 		posX = 0;
 		posY = 0;
 		matrix = new MainCharacter[9][19];
-		//Lucas = new MainCharacter(posX,posY,lucasimg,app);
+		barrier = new int[9][19];
 		name = new NameScreen(app);
 		home = new HomeScreen(app);
 		score = new ScoreScreen(app);
@@ -113,6 +113,7 @@ public class Logic {
 			//Dibujar personaje y fondo
 			game1.draw();
 			drawChar();
+			drawFloor1();
 			break;
 		// Nivel2
 		case 3:
@@ -145,12 +146,12 @@ public class Logic {
 	}
 	
 	public void calcPos() {
-		posX = (cordY*60)+12;
-		posY = (cordX*60)+100;
+		posX = (cordY*60)+30;
+		posY = (cordX*60)+160;
 	}
 	
 	public void createLucas() {
-		matrix[7][0] = new MainCharacter(posX,posY,lucasimg,app);
+		matrix[cordX][cordY] = new MainCharacter(posX,posY,lucasimg,app);
 	}
 	
 	public void findLucas() {
@@ -168,6 +169,185 @@ public class Logic {
 		try {
 			if(matrix[cordX][cordY] != null) {
 				matrix[cordX][cordY].draw();
+			}
+		}
+		catch(Exception e) {
+			e.getLocalizedMessage();
+		}
+	}
+	
+	public void drawFloor1() {
+		barrier[7][0] = 1;
+		barrier[7][1] = 1;
+		barrier[7][2] = 1;
+		barrier[7][3] = 1;
+		barrier[8][3] = 1;
+		
+		barrier[3][4] = 1;
+		barrier[3][5] = 1;
+		
+		barrier[8][5] = 1;
+		barrier[7][5] = 1;
+		barrier[6][5] = 1;
+		barrier[6][6] = 1;
+		barrier[6][7] = 1;
+		barrier[6][8] = 1;
+		barrier[6][9] = 1;
+		barrier[7][10] = 1;
+		barrier[7][11] = 1;
+		barrier[7][12] = 1;
+		barrier[7][13] = 1;
+		barrier[8][13] = 1;
+		
+		barrier[4][7] = 1;
+		barrier[4][8] = 1;
+		
+		barrier[3][11] = 1;
+		barrier[3][12] = 1;
+		
+		barrier[2][16] = 1;
+		barrier[2][17] = 1;
+		
+		barrier[8][16] = 1;
+		barrier[7][16] = 1;
+		barrier[7][17] = 1;
+		barrier[7][18] = 1;
+	}
+	
+	public void drawFloor2() {
+		barrier[3][0] = 1;
+		barrier[3][1] = 1;
+		barrier[3][5] = 1;
+		barrier[3][6] = 1;
+		
+		barrier[4][5] = 1;
+		barrier[4][6] = 1;
+		
+		barrier[5][5] = 1;
+		barrier[5][6] = 1;
+		barrier[5][17] = 1;
+		barrier[5][18] = 1;
+		
+		barrier[6][5] = 1;
+		barrier[6][6] = 1;
+		barrier[6][11] = 1;
+		barrier[6][12] = 1;
+		barrier[6][13] = 1;
+		barrier[6][14] = 1;
+		
+		barrier[7][0] = 1;
+		barrier[7][1] = 1;
+		barrier[7][2] = 1;
+		barrier[7][3] = 1;
+		barrier[7][5] = 1;
+		barrier[7][6] = 1;
+		barrier[7][11] = 1;
+		barrier[7][14] = 1;
+		
+		barrier[8][3] = 1;
+		barrier[8][5] = 1;
+		barrier[8][6] = 1;
+		barrier[8][8] = 1;
+		barrier[8][9] = 1;
+		barrier[8][11] = 1;
+		barrier[8][14] = 1;
+		barrier[8][16] = 1;
+		barrier[8][17] = 1;
+		barrier[8][18] = 1;
+		}
+	
+	public void drawFloor3() {
+		barrier[1][10] = 1;
+
+		barrier[2][2] = 1;
+		barrier[2][3] = 1;
+		barrier[2][4] = 1;
+		
+		barrier[3][12] = 1;
+		barrier[3][13] = 1;
+		barrier[3][14] = 1;
+		
+		barrier[4][1] = 1;
+		barrier[4][18] = 1;
+		
+		barrier[5][1] = 1;
+		barrier[5][4] = 1;
+		barrier[5][5] = 1;
+		barrier[5][6] = 1;
+		barrier[5][15] = 1;
+		barrier[5][16] = 1;
+		
+		barrier[6][1] = 1;
+		
+		barrier[7][1] = 1;
+		barrier[7][11] = 1;
+		barrier[7][12] = 1;
+		barrier[7][13] = 1;
+		
+		barrier[8][1] = 1;
+		barrier[8][3] = 1;
+		barrier[8][4] = 1;
+		barrier[8][7] = 1;
+		barrier[8][8] = 1;
+		barrier[8][9] = 1;
+		barrier[8][11] = 1;
+		barrier[8][13] = 1;
+	}
+	
+	public void moveL() {
+		System.out.println("move L");
+		try {
+			if(cordY - 1 > -1) {
+				if(barrier[cordX][cordY - 1] != 1) {
+					cordY -= 1;
+					calcPos();
+					matrix[cordX][cordY] = new MainCharacter(posX,posY,lucasimg,app);
+					matrix[cordX][cordY + 1] = null;
+				}
+			}
+		}
+		catch(Exception e) {
+			e.getLocalizedMessage();
+		}
+	}
+	
+	public void moveR() {
+		try {
+			if(cordY + 1 < 20) {
+				if(barrier[cordX][cordY + 1] != 1) {
+					cordY += 1;
+					calcPos();
+					matrix[cordX][cordY] = new MainCharacter(posX,posY,lucasimg,app);
+					matrix[cordX][cordY - 1] = null;
+				}
+			}
+		}
+		catch(Exception e) {
+			e.getLocalizedMessage();
+		}
+	}
+	
+	public void moveU() {
+		try {
+			if(cordX - 1 > -1) {
+				cordX -= 1;
+				calcPos();
+				matrix[cordX][cordY] = new MainCharacter(posX, posY, lucasimg, app);
+				matrix[cordX + 1][cordY] = null;
+			}
+		}
+		catch(Exception e) {
+			e.getLocalizedMessage();
+		}
+	}
+	
+	public void moveD() {
+		try {
+			if(cordX + 1 > -1) {
+				cordX += 1;
+				calcPos();
+				matrix[cordX][cordY] = new MainCharacter(posX, posY, lucasimg, app);
+				matrix[cordX - 1][cordY] = null;
 			}
 		}
 		catch(Exception e) {
