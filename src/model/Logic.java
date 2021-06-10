@@ -39,6 +39,8 @@ public class Logic {
 	private int posY;
 	private boolean coin1;
 	private boolean coin2;
+	private boolean medicine1;
+	private boolean medicine2;
 	NameScreen name;
 	HomeScreen home;
 	ScoreScreen score;
@@ -72,6 +74,8 @@ public class Logic {
 		posY = 0;
 		coin1 = true;
 		coin2 = true;
+		medicine1 = true;
+		medicine2 = true;
 		matrix = new MainCharacter[9][19];
 		barrier = new int[9][19];
 		coins = new Coin[9][19];
@@ -130,7 +134,11 @@ public class Logic {
 			
 			createCoins1();
 			drawCoins1();
-			deleteCoin();
+			deleteCoin1();
+			
+			createMedical1();
+			drawMedical1();
+			deleteMedical1();
 			
 			drawChar();
 			drawFloor1();
@@ -177,14 +185,20 @@ public class Logic {
 		}
 	}
 	
+	//=============================================================//
+	
 	public void calcPos() {
 		posX = (cordY*60)+30;
 		posY = (cordX*60)+160;
 	}
 	
+	//=============================================================//
+	
 	public void createLucas() {
 		matrix[cordX][cordY] = new MainCharacter(posX,posY,lucasimg,app);
 	}
+	
+	//=============================================================//
 	
 	public void findLucas() {
 		for(int x = 0; x < 10; x++) {
@@ -197,6 +211,8 @@ public class Logic {
 		}
 	}
 	
+	//=============================================================//
+	
 	public void drawChar(){
 		try {
 			if(matrix[cordX][cordY] != null) {
@@ -208,11 +224,48 @@ public class Logic {
 		}
 	}
 	
-	public void createCoins1() {
+	//=============================================================//
+	// CREAR MONEDAS
+	//=============================================================//
+	
+	public void createCoins1() { //Crear Monedas Nivel 1
 		coins[1][17] = new Coin(1040, 223, app);
 	}
 	
-	public void drawCoins1() {
+	public void createCoins2() { //Crear Monedas Nivel 2
+		coins[7][8] = new Coin(500, 595, app);
+		coins[4][18] = new Coin(1100, 413, app);
+	}
+	
+	public void createCoins3() { //Crear Monedas Nivel 3
+		coins[7][4] = new Coin(263, 593, app);
+		coins[0][10] = new Coin(616, 179, app);
+	}
+	
+	//=============================================================//
+	// CREAR SUMINISTROS MÉDICOS
+	//=============================================================//
+	
+	public void createMedical1() { //Crear Suministros Nivel 1
+		medicines[2][4] = new Medicine(270, 300, app);
+		medicines[2][12] = new Medicine(750, 300, app);
+	}
+	
+	public void createMedical2() { //Crear Suministros Nivel 2
+		medicines[2][0] = new Medicine(30, 300, app);
+		medicines[5][11] = new Medicine(690, 480, app);
+	}
+	
+	public void createMedical3() { //Crear Suministros Nivel 3
+		medicines[4][6] = new Medicine(390, 420, app);
+		medicines[6][13] = new Medicine(810, 540, app);
+	}
+	
+	//=============================================================//
+	// PINTAR MONEDAS
+	//=============================================================//
+
+	public void drawCoins1() { 	//Pintar Monedas Nivel 1
 		if(coins[1][17] != null) {
 			if(coin1) {
 				coins[1][17].draw();
@@ -220,8 +273,81 @@ public class Logic {
 		}
 	}
 	
+	public void drawCoins2() {	//Pintar Monedas Nivel 2
+		if(coins[7][8] != null) {
+			if(coin1) {
+				coins[7][8].draw();
+			}
+		}
+		if(coins[4][18] != null) {
+			if(coin2) {
+				coins[4][18].draw();
+			}
+		}
+	}
+	
+	public void drawCoins3() {	//Pintar Monedas Nivel 3
+		if(coins[7][4] != null) {
+			if(coin1) {
+				coins[7][4].draw();
+			}
+		}
+		if(coins[0][10] != null) {
+			if(coin2) {
+				coins[0][10].draw();
+			}
+		}
+	}
+	
+	//=============================================================//
+	// PINTAR SUMINISTROS MÉDICOS
+	//=============================================================//
+	
+	public void drawMedical1() {	//Pintar Suministros Nivel 1
+		if(medicines[2][4] != null) {
+			if(medicine1) {
+				medicines[2][4].draw();
+			}
+		}
+		if(medicines[2][12] != null) {
+			if(medicine2) {
+				medicines[2][12].draw();
+			}
+		}
+	}
+	
+	public void drawMedical2() {	//Pintar Suministros Nivel 2
+		if(medicines[2][0] != null) {
+			if(medicine1) {
+				medicines[2][0].draw();
+			}
+		}
+		if(medicines[5][11] != null) {
+			if(medicine2) {
+				medicines[5][11].draw();
+			}
+		}
+	}
+	
+	public void drawCMedical3() {	//Pintar Suministros Nivel 3
+		if(medicines[4][6] != null) {
+			if(medicine1) {
+				medicines[4][6].draw();
+			}
+		}
+		if(medicines[6][13] != null) {
+			if(medicine2) {
+				medicines[6][13].draw();
+			}
+		}
+	}
+	
+	//=============================================================//
+	// BORRAR MONEDAS
+	//=============================================================//
+	
 	@SuppressWarnings("static-access")
-	public void deleteCoin() {
+	public void deleteCoin1() {	//Borrar Monedas Nivel 1
 		int dist = 0;
 		
 		dist = (int) app.dist(cordX, cordY, 1, 17);
@@ -230,6 +356,97 @@ public class Logic {
 			coin1 = false;
 		}
 	}
+	
+	@SuppressWarnings("static-access")
+	public void deleteCoin2() {	//Borrar Monedas Nivel 2
+		int dist1 = 0;
+		int dist2 = 0;
+		
+		dist1 = (int) app.dist(cordX, cordY, 7, 8);
+		dist2 = (int) app.dist(cordX, cordY, 4, 18);
+		
+		if(dist1 < 1) {
+			coin1 = false;
+		}
+		
+		if(dist2 < 1) {
+			coin2 = false;
+		}
+	}
+	
+	@SuppressWarnings("static-access")
+	public void deleteCoin3() {	//Borrar Monedas Nivel 3
+		int dist1 = 0;
+		int dist2 = 0;
+		
+		dist1 = (int) app.dist(cordX, cordY, 7, 4);
+		dist2 = (int) app.dist(cordX, cordY, 0, 10);
+		
+		if(dist1 < 1) {
+			coin1 = false;
+		}
+		
+		if(dist2 < 1) {
+			coin2 = false;
+		}
+	}
+	
+	//=============================================================//
+	// BORRAR SUMINISTROS MÉDICOS
+	//=============================================================//
+	
+	@SuppressWarnings("static-access")
+	public void deleteMedical1() {	//Borrar Suministros Nivel 1
+		int dist1 = 0;
+		int dist2 = 0;
+		
+		dist1 = (int) app.dist(cordX, cordY, 2, 4);
+		dist2 = (int) app.dist(cordX, cordY, 2, 12);
+		
+		if(dist1 < 1) {
+			medicine1 = false;
+		}
+		
+		if(dist2 < 1) {
+			medicine2 = false;
+		}
+	}
+	
+	@SuppressWarnings("static-access")
+	public void deleteMedical2() {	//Borrar Suministros Nivel 2
+		int dist1 = 0;
+		int dist2 = 0;
+		
+		dist1 = (int) app.dist(cordX, cordY, 2, 0);
+		dist2 = (int) app.dist(cordX, cordY, 5, 11);
+		
+		if(dist1 < 1) {
+			medicine1 = false;
+		}
+		
+		if(dist2 < 1) {
+			medicine2 = false;
+		}
+	}
+	
+	@SuppressWarnings("static-access")
+	public void deleteMedical3() {	//Borrar Suministros Nivel 3s
+		int dist1 = 0;
+		int dist2 = 0;
+		
+		dist1 = (int) app.dist(cordX, cordY, 4, 6);
+		dist2 = (int) app.dist(cordX, cordY, 6, 13);
+		
+		if(dist1 < 1) {
+			medicine1 = false;
+		}
+		
+		if(dist2 < 1) {
+			medicine2 = false;
+		}
+	}
+	
+	//=============================================================//
 	
 	public void drawFloor1() {
 		barrier[7][0] = 1;
@@ -352,47 +569,16 @@ public class Logic {
 	public void collectable() {
 		switch (screen) {
 		case 2:
-			/*
-			coinCol.add(new Coin(1040, 233, app));
-			medCol.add(new Medicine(740, 290, app));
-			medCol.add(new Medicine(265, 290, app));
-			 */
-			
+						
 			break;
 		case 3:
-			coinCol.add(new Coin(500, 595, app));
-			coinCol.add(new Coin(1100, 413, app));
+			
 			medCol.add(new Medicine(685, 473, app));
 			
-			//Monedas
-			for (int i = 0; i < coinCol.size(); i++) {
-				coinCol.get(i).draw(); 
-				//Insertar condicional o método para recolectar
-			}
-			
-			//Insumos medicos
-			for (int i = 0; i < medCol.size(); i++) {
-				medCol.get(i).draw(); 
-				//Insertar condicional o método para recolectar
-			}
 			break;
 		case 4:
-			coinCol.add(new Coin(263, 593, app));
-			coinCol.add(new Coin(616, 179, app));
 			medCol.add(new Medicine(375, 412, app));
 			medCol.add(new Medicine(797, 534, app));
-			
-			//Monedas
-			for (int i = 0; i < coinCol.size(); i++) {
-				coinCol.get(i).draw(); 
-				//Insertar condicional o método para recolectar
-			}
-			
-			//Insumos medicos
-			for (int i = 0; i < medCol.size(); i++) {
-				medCol.get(i).draw(); 
-				//Insertar condicional o método para recolectar
-			}
 			
 			break;
 		default:
