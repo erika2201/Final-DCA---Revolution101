@@ -41,6 +41,7 @@ public class Logic {
 	private boolean coin2;
 	private boolean medicine1;
 	private boolean medicine2;
+	private boolean sumScore;
 	NameScreen name;
 	HomeScreen home;
 	ScoreScreen score;
@@ -55,6 +56,7 @@ public class Logic {
 	int countsec = 0;
 	int countmin = 0;
 	int sec;
+	int scores; //la instancia de ScoreScreen se llama score
 	PImage lucasimg;
 
 	public int screen;
@@ -76,6 +78,7 @@ public class Logic {
 		coin2 = true;
 		medicine1 = true;
 		medicine2 = true;
+		sumScore = false;
 		matrix = new MainCharacter[9][19];
 		barrier = new int[9][19];
 		coins = new Coin[9][19];
@@ -94,6 +97,8 @@ public class Logic {
 		date = new Date();
 		calcPos();
 		createLucas();
+		scores = 0;
+		
 		//Recolectables
 		coinCol = new ArrayList<Coin>();
 		medCol = new ArrayList<Medicine>();
@@ -139,6 +144,10 @@ public class Logic {
 			createMedical1();
 			drawMedical1();
 			deleteMedical1();
+			
+			app.createFont("arial",16);
+			app.text(scores, 1100, 20);
+			scores();
 			
 			drawChar();
 			drawFloor1();
@@ -353,7 +362,9 @@ public class Logic {
 		dist = (int) app.dist(cordX, cordY, 1, 17);
 		
 		if(dist < 1) {
+			coins[1][17] = null;
 			coin1 = false;
+			//sumScore = true;
 		}
 	}
 	
@@ -447,6 +458,18 @@ public class Logic {
 	}
 	
 	//=============================================================//
+	
+	public void scores() {
+		System.err.println(sumScore);
+		if(coin1==false) {
+			sumScore=true;
+		}
+			if (sumScore) {
+				scores +=1;
+					sumScore=false;
+			}
+		
+	}
 	
 	public void drawFloor1() {
 		barrier[7][0] = 1;
