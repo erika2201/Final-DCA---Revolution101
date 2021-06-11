@@ -27,7 +27,7 @@ public class Main extends PApplet {
 	@Override
 	public void draw() {
 		
-	System.out.println(mouseX+" "+mouseY);
+	//System.out.println(mouseX+" "+mouseY);
 		c.changeScreen();
 	}
 	
@@ -46,9 +46,6 @@ public class Main extends PApplet {
 			}
 			if(keyCode == LEFT) {
 				c.moveL();
-			}
-			if(keyCode == DOWN) {
-				c.moveD();
 			}
 		}
 	}

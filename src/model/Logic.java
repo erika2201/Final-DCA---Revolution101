@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JOptionPane;
 
@@ -45,6 +47,8 @@ public class Logic {
 	private boolean firstPaint;
 	private boolean secondPaint;
 	private boolean thirdPaint;
+	private Timer animation;
+	private TimerTask gravity;
 	NameScreen name;
 	HomeScreen home;
 	ScoreScreen score;
@@ -106,8 +110,20 @@ public class Logic {
 		sortByDate= new ByDate();
 		sortByTime= new ByTime();
 		
+		animation = new Timer();
+		gravity = new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					gravity();
+				}
+				catch(Exception e) {
+					e.getLocalizedMessage();
+				}
+			}
+		};
 		
-	
+		animation.schedule(gravity, 10, 500);
 	}
 	
 	public void changeScreen() {
@@ -147,8 +163,6 @@ public class Logic {
 			Chrono();
 			
 			//Dibujar personaje y fondo
-		
-			
 			
 			drawCoins1();
 			deleteCoin1();
@@ -216,7 +230,7 @@ public class Logic {
 		// Nivel3
 		case 4:
 			if(thirdPaint) {
-				cordX =3;
+				cordX =2;
 				cordY = 0;
 				posX = 0;
 				posY = 0;
@@ -757,7 +771,9 @@ public class Logic {
 		barrier[8][13] = 1;
 	}
 	
-
+	//=============================================================//
+	// MOVIMIENTO A LA IZQUIERDA
+	//=============================================================//
 	
 	public void moveL() {
 		try {
@@ -776,6 +792,10 @@ public class Logic {
 		}
 	}
 	
+	//=============================================================//
+	// MOVIMIENTO A LA DERECHA
+	//=============================================================//
+	
 	public void moveR() {
 		
 		try {
@@ -793,13 +813,19 @@ public class Logic {
 		}
 	}
 	
+	//=============================================================//
+	// MOVIMIENTO HACIA ARRIBA
+	//=============================================================//
+	
 	public void moveU() {
 		try {
 			if(cordX - 1 > -1) {
-				cordX -= 1;
-				calcPos();
-				matrix[cordX][cordY] = new MainCharacter(posX, posY, lucasimg, app);
-				matrix[cordX + 1][cordY] = null;
+				if(barrier[cordX - 1][cordY] != 1) {
+					cordX -= 1;
+					calcPos();
+					matrix[cordX][cordY] = new MainCharacter(posX, posY, lucasimg, app);
+					matrix[cordX + 1][cordY] = null;
+				}
 			}
 		}
 		catch(Exception e) {
@@ -807,19 +833,43 @@ public class Logic {
 		}
 	}
 	
+	//=============================================================//
+	// MOVIMIENTO HACIA ABAJO
+	//=============================================================// 
+	
 	public void moveD() {
 		try {
-			if(cordX + 1 > -1) {
-				cordX += 1;
-				calcPos();
-				matrix[cordX][cordY] = new MainCharacter(posX, posY, lucasimg, app);
-				matrix[cordX - 1][cordY] = null;
+			if(cordX + 1 < 9) {
+				if(barrier[cordX + 1][cordY] != 1) {
+					cordX += 1;
+					calcPos();
+					matrix[cordX][cordY] = new MainCharacter(posX, posY, lucasimg, app);
+					matrix[cordX - 1][cordY] = null;
+				}
 			}
 		}
 		catch(Exception e) {
 			e.getLocalizedMessage();
 		}
 	}
+	
+	//=============================================================//
+	// SALTO
+	//=============================================================//
+	
+	public void jump() {
+		moveU();
+		moveU();
+	}
+	
+	//=============================================================//
+	// GRAVEDAD
+	//=============================================================//
+	
+	public void gravity() {
+		moveD();
+	}
+	
 	public void winScreen() {
 		//Condicion de Cambio de pantalla
 		if(screen==2&&cordX==6&&cordY==18) {

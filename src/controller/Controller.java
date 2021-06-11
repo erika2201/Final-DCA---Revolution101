@@ -30,11 +30,7 @@ public class Controller {
 	}
 	
 	public void moveU() {
-		l.moveU();
-	}
-	
-	public void moveD() {
-		l.moveD();
+		l.jump();
 	}
 }
 
