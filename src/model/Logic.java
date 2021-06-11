@@ -744,6 +744,7 @@ public class Logic {
 		barrier[3][13] = 1;
 		barrier[3][14] = 1;
 		
+		barrier[4][0] = 1;
 		barrier[4][1] = 1;
 		barrier[4][18] = 1;
 		
