@@ -178,15 +178,7 @@ public class Logic {
 			drawFloor1();
 			winScreen();
 			lose();
-			/*
-			System.out.println("");
-			System.out.println("-----------------------------------------------------------------------");
-			System.out.println("");
-			System.out.println("X: " + cordY);
-			System.out.println("");
-			System.out.println("Y: " + cordX);
 			
-			*/
 			break;
 		// Nivel2
 		case 3:
@@ -217,20 +209,12 @@ public class Logic {
 			drawFloor2();
 			winScreen();
 			lose();
-			/*
-			System.out.println("");
-			System.out.println("-----------------------------------------------------------------------");
-			System.out.println("");
-			System.out.println("X: " + cordY);
-			System.out.println("");
-			System.out.println("Y: " + cordX);
-			*/
 			
 			break;
 		// Nivel3
 		case 4:
 			if(thirdPaint) {
-				cordX =2;
+				cordX = 3;
 				cordY = 0;
 				posX = 0;
 				posY = 0;
@@ -256,14 +240,6 @@ public class Logic {
 			drawFloor3();
 			winScreen();
 			lose();
-			/*
-			System.out.println("");
-			System.out.println("-----------------------------------------------------------------------");
-			System.out.println("");
-			System.out.println("X: " + cordY);
-			System.out.println("");
-			System.out.println("Y: " + cordX);
-			*/
 			
 			break;
 		// Resumen del juego
@@ -859,8 +835,10 @@ public class Logic {
 	//=============================================================//
 	
 	public void jump() {
-		moveU();
-		moveU();
+		if(barrier[cordX + 1][cordY] == 1) {
+			moveU();
+			moveU();
+		}
 	}
 	
 	//=============================================================//
