@@ -496,7 +496,7 @@ public class Logic {
 		
 		
             	float dist =  (float) app.dist(posX, posY, coins[1][17].getPosX(),coins[1][17].getPosY());
-            	//System.out.println(dist);
+            	
         		if(dist <= 11) {
   
         			coins[1][17].setPosX(765);
@@ -514,7 +514,7 @@ public class Logic {
 	
 		float dist1 =  (float) app.dist(posX, posY, coins[7][8].getPosX(),coins[7][8].getPosY());
     	float dist2 =  (float) app.dist(posX, posY, coins[4][18].getPosX(),coins[4][18].getPosY());
-    	//System.out.println(dist1+" "+dist2);
+    	
 		if(dist1 < 20) {
 			coins[7][8].setPosX(745);
 			coins[7][8].setPosY(10);
@@ -534,7 +534,7 @@ public class Logic {
 	public void deleteCoin3() {	//Borrar Monedas Nivel 3
 		float dist1 =  (float) app.dist(posX, posY, coins[7][4].getPosX(),coins[7][4].getPosY());
     	float dist2 =  (float) app.dist(posX, posY, coins[0][10].getPosX(),coins[0][10].getPosY());
-    	System.out.println(dist1+" "+dist2);
+    	
 		if(dist1 < 20) {
 			coins[7][4].setPosX(725);
 			coins[7][4].setPosY(10);
@@ -560,7 +560,7 @@ public class Logic {
 		
             	float dist1 =  (float) app.dist(posX, posY, medicines[2][4].getPosX(),medicines[2][4].getPosY());
             	float dist2 =  (float) app.dist(posX, posY, medicines[2][12].getPosX(),medicines[2][12].getPosY());
-            	//System.out.println(dist1);
+            	
         		if(dist1 <= 20) {
   
         			medicines[2][4].setPosX(725);
@@ -584,7 +584,7 @@ public class Logic {
 		
             	float dist1 =  (float) app.dist(posX, posY, medicines[2][0].getPosX(),medicines[2][0].getPosY());
             	float dist2 =  (float) app.dist(posX, posY, medicines[5][11].getPosX(),medicines[5][11].getPosY());
-            	//System.out.println(dist1);
+            	
         		if(dist1 <= 20) {
   
         			medicines[2][0].setPosX(725);
@@ -607,7 +607,7 @@ public class Logic {
 		
             	float dist1 =  (float) app.dist(posX, posY, medicines[4][6].getPosX(),medicines[4][6].getPosY());
             	float dist2 =  (float) app.dist(posX, posY, medicines[6][13].getPosX(),medicines[6][13].getPosY());
-            	//System.out.println(dist1);
+            	
         		if(dist1 <= 20) {
   
         			medicines[4][6].setPosX(748);
@@ -999,23 +999,23 @@ public class Logic {
 			//Ordenar por nombre
 			if((101<app.mouseX&&app.mouseX<299)&&(199<app.mouseY&&app.mouseY<243)) {
 			Collections.sort(gamesList,sortByName);
-			System.out.println("ordenar por nombre");
+			
 			}
 			//Ordenar por puntaje (ORDENAMIENTO NATURAL)
 			if((349<app.mouseX&&app.mouseX<547)&&(199<app.mouseY&&app.mouseY<243)) {
 				
 				Collections.sort(gamesList);
-				System.out.println("ordenar por puntaje");
+				
 				}
 			//Ordenar por fecha
 			if((597<app.mouseX&&app.mouseX<796)&&(199<app.mouseY&&app.mouseY<243)) {
 				Collections.sort(gamesList,sortByDate);
-				System.out.println("ordenar por fecha");
+			
 				}
 			//Ordenar por tiempo
 			if((847<app.mouseX&&app.mouseX<1045)&&(199<app.mouseY&&app.mouseY<243)) {
 				Collections.sort(gamesList,sortByTime);
-				System.out.println("ordenar por tiempo");
+				
 				}
 			break;
 			}
@@ -1028,7 +1028,7 @@ public class Logic {
 		 String s1= String.valueOf(countmin);
 		 String s2= String.valueOf(countsec);
 		 String s3 = s1+s2;
-		System.out.println(s3);
+		
 		gamesList.add(new Game(playerList.get(playerList.size()-1).getName(),scores,Integer.parseInt(s3),date,app));
 	}
 }
