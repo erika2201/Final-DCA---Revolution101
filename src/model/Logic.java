@@ -27,7 +27,6 @@ import view.VictoryScreen;
 public class Logic {
 	private PApplet app;
 	private LinkedList<Player> playerList;
-	private ArrayList<Enemy> enemyList;
 	private LinkedList<Game> gamesList;
 	private ByName sortByName;
 	private ByDate sortByDate;
@@ -36,6 +35,7 @@ public class Logic {
 	private int[][] barrier;
 	private Coin[][] coins;
 	private Medicine[][] medicines;
+	private Enemy[][] enemies;
 	private int cordX;
 	private int cordY;
 	private int posX;
@@ -44,6 +44,8 @@ public class Logic {
 	private boolean coin2;
 	private boolean medicine1;
 	private boolean medicine2;
+	private boolean enemy1;
+	private boolean enemy2;
 	private boolean firstPaint;
 	private boolean secondPaint;
 	private boolean thirdPaint;
@@ -84,6 +86,8 @@ public class Logic {
 		coin2 = true;
 		medicine1 = true;
 		medicine2 = true;
+		enemy1=true;
+		enemy2=true;
 		firstPaint = true;
 		secondPaint = true;
 		thirdPaint = true;
@@ -91,6 +95,7 @@ public class Logic {
 		barrier = new int[9][19];
 		coins = new Coin[9][19];
 		medicines = new Medicine[9][19];
+		enemies = new Enemy[9][19];
 		name = new NameScreen(app);
 		home = new HomeScreen(app);
 		score = new ScoreScreen(app);
@@ -151,6 +156,7 @@ public class Logic {
 				createLucas();
 				createCoins1();
 				createMedical1();
+				createEnemy1();
 				drawFloor1();
 				scores = 0;
 				timer=0;
@@ -169,6 +175,10 @@ public class Logic {
 			
 			drawMedical1();
 			deleteMedical1();
+			
+			drawEnemy1();
+			loseEnemy1();
+			
 			app.fill(238,19,19);
 			app.textSize(25);
 			app.createFont("arial",16);
@@ -191,6 +201,7 @@ public class Logic {
 				createLucas();
 				createCoins2();
 				createMedical2();
+				createEnemy2();
 				drawFloor2();
 				secondPaint=false;
 			}
@@ -201,6 +212,9 @@ public class Logic {
 			
 			drawMedical2();
 			deleteMedical2();
+			
+			drawEnemy2();
+			loseEnemy2();
 			
 			app.createFont("arial",16);
 			app.text(scores, 1100, 20);
@@ -222,6 +236,7 @@ public class Logic {
 				createLucas();
 				createCoins3();
 				createMedical3();
+				createEnemy3();
 				drawFloor3();
 				thirdPaint=false;
 			}
@@ -232,6 +247,9 @@ public class Logic {
 			
 			drawMedical3();
 			deleteMedical3();
+			
+			drawEnemy3();
+			loseEnemy3();
 			
 			app.createFont("arial",16);
 			app.text(scores, 1100, 20);
@@ -245,6 +263,8 @@ public class Logic {
 		// Resumen del juego
 		case 5:
 			result.draw();
+			app.fill(0);
+			app.textSize(20);
 			app.text(gamesList.get(gamesList.size()-1).getScore(),365,389);
 			app.text(gamesList.get(gamesList.size()-1).getTime()+" segundos",365,447);
 			break;
@@ -264,7 +284,7 @@ public class Logic {
 		//	System.out.println(gamesList.get(0).getTime());
 			score.draw();
 			for (int i = 0; i < gamesList.size(); i++) {
-				app.fill(238,19,19);
+				app.fill(0);
 				app.textSize(20);
 				app.text(gamesList.get(i).getPlayName(), 137, 292+(30*(i)));
 				app.text(gamesList.get(i).getScore(), 383, 292+(30*(i)));
@@ -381,6 +401,24 @@ public class Logic {
 		medicines[4][6] = new Medicine(390, 420,39, app);
 		medicines[6][13] = new Medicine(810, 540,39, app);
 	}
+	//=============================================================//
+	// CREAR ENEMIGOS
+	//=============================================================//
+	//posX = (cordY*60)+30;
+	//posY = (cordX*60)+160;
+	public void createEnemy1() { //Crear Enemigos Nivel 1
+		enemies[6][10] = new Enemy((10*60)+30, (6*60)+160, app);
+	}
+	
+	public void createEnemy2() { //Crear Enemigos Nivel 2
+		enemies[7][16] = new Enemy((16*60)+30, (7*60)+160, app);
+	}
+	
+	public void createEnemy3() { //Crear Enemigos Nivel 3
+		enemies[1][3] = new Enemy((3*60)+30, (1*60)+160, app);
+		enemies[7][8] = new Enemy((8*60)+30, (7*60)+160, app);
+	}
+	
 	
 	//=============================================================//
 	// PINTAR MONEDAS
@@ -462,6 +500,32 @@ public class Logic {
 			}
 		}
 	}
+	//=============================================================//
+	// PINTAR ENEMIGOS
+	//=============================================================//
+	public void drawEnemy1() { 	//Pintar Enemigos Nivel 1
+		if(enemies[6][10] != null) {
+				enemies[6][10].draw();
+				new Thread(enemies[6][10]).start();
+		}
+	}
+	public void drawEnemy2() { 	//Pintar Enemigos Nivel 2
+		if(enemies[7][16] != null) {
+				enemies[7][16].draw();
+				new Thread(enemies[7][16]).start();
+		}
+	}
+	public void drawEnemy3() { 	//Pintar Enemigos Nivel 3
+		if(enemies[1][3] != null) {
+				enemies[1][3].draw();
+				new Thread(enemies[1][3]).start();
+		}
+		if(enemies[7][8] != null) {
+			enemies[7][8].draw();
+			new Thread(enemies[7][8]).start();
+	}
+	}
+
 	
 	//=============================================================//
 	// BORRAR MONEDAS
@@ -600,6 +664,40 @@ public class Logic {
         		} 
            
 	}
+	//=============================================================//
+	// COMPROBAR PERDER POR ENEMIGOS
+	//=============================================================//
+	public void loseEnemy1() {	//Perder por enemigos Nivel 1
+		
+		
+    	float dist =  (float) app.dist(posX, posY, enemies[6][10].getPosX(),enemies[6][10].getPosY());
+		if(dist <= 11) {
+
+			screen=7;
+			registerGame();
+		} 
+		}
+public void loseEnemy2() {	//Perder por enemigos Nivel 1
+		
+		
+    	float dist =  (float) app.dist(posX, posY, enemies[7][16].getPosX(),enemies[7][16].getPosY());
+		if(dist <= 11) {
+
+			screen=7;
+			registerGame();
+		} 
+		}
+public void loseEnemy3() {	//Perder por enemigos Nivel 1
+	
+	
+	float dist1 =  (float) app.dist(posX, posY, enemies[1][3].getPosX(),enemies[1][3].getPosY());
+	float dist2 =  (float) app.dist(posX, posY, enemies[7][8].getPosX(),enemies[7][8].getPosY());
+	if(dist1 <= 11||dist2<=11) {
+
+		screen=7;
+		registerGame();
+	} 
+	}
 	
 	//=============================================================//
 	
@@ -677,6 +775,7 @@ public class Logic {
 		
 		barrier[6][5] = 1;
 		barrier[6][6] = 1;
+		barrier[6][10] = 1;
 		barrier[6][11] = 1;
 		barrier[6][12] = 1;
 		barrier[6][13] = 1;
@@ -981,7 +1080,6 @@ public class Logic {
 			}
 			//Ordenar por puntaje (ORDENAMIENTO NATURAL)
 			if((349<app.mouseX&&app.mouseX<547)&&(199<app.mouseY&&app.mouseY<243)) {
-				
 				Collections.sort(gamesList);
 				
 				}
