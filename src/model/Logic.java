@@ -26,6 +26,7 @@ import view.VictoryScreen;
 
 public class Logic {
 	private PApplet app;
+	private ArrayList<Cloud> clouds;
 	private LinkedList<Player> playerList;
 	private LinkedList<Game> gamesList;
 	private ByName sortByName;
@@ -70,14 +71,12 @@ public class Logic {
 	PImage lucasimg;
 	String time1;
 	String time2;
-
 	public int screen;
-	//Recolectables
-	
 	
 	
 	public Logic(PApplet app) {
 		this.app = app;
+		clouds = new ArrayList<Cloud>();
 		playerList = new LinkedList<Player>();
 		gamesList = new LinkedList<Game>();
 		lucasimg = app.loadImage("img/Lucas.png");
@@ -129,6 +128,13 @@ public class Logic {
 		};
 		
 		animation.schedule(gravity, 10, 500);
+		
+		for (int i = 0; i <7; i++) {
+			float posX = app.random (-50,1000);
+			float posY = app.random (-50,117);
+			
+			clouds.add(new Cloud (posX, posY, app));
+		}
 	}
 	
 	public void changeScreen() {
@@ -146,7 +152,6 @@ public class Logic {
 			break;
 		// Nivel1
 		case 2:
-			
 			if(firstPaint) {
 				cordX = 6;
 				cordY = 0;
@@ -165,6 +170,7 @@ public class Logic {
 				firstPaint=false;
 			}
 			game1.draw();
+			drawCloud();
 			//Activar cronometro
 			Chrono();
 			
@@ -419,7 +425,6 @@ public class Logic {
 		enemies[7][8] = new Enemy((8*60)+30, (7*60)+160, app);
 	}
 	
-	
 	//=============================================================//
 	// PINTAR MONEDAS
 	//=============================================================//
@@ -526,14 +531,21 @@ public class Logic {
 	}
 	}
 
-	
+	//=============================================================//
+	// PINTAR NUBES
+	//=============================================================//
+	public void drawCloud() {
+		for (Cloud littleClouds : clouds) {
+			littleClouds.draw();
+			new Thread(littleClouds).start(); 
+		}	
+	}
 	//=============================================================//
 	// BORRAR MONEDAS
 	//=============================================================//
 	
 	@SuppressWarnings("static-access")
 	public void deleteCoin1() {	//Borrar Monedas Nivel 1
-		
 		
             	float dist =  (float) app.dist(posX, posY, coins[1][17].getPosX(),coins[1][17].getPosY());
             	
@@ -544,9 +556,6 @@ public class Logic {
         			coins[1][17].setSize(21);
         			scoreCoin();
         		} 
-           
-		
-		
 	}
 	
 	@SuppressWarnings("static-access")
@@ -669,7 +678,6 @@ public class Logic {
 	//=============================================================//
 	public void loseEnemy1() {	//Perder por enemigos Nivel 1
 		
-		
     	float dist =  (float) app.dist(posX, posY, enemies[6][10].getPosX(),enemies[6][10].getPosY());
 		if(dist <= 11) {
 
@@ -677,9 +685,9 @@ public class Logic {
 			registerGame();
 		} 
 		}
-public void loseEnemy2() {	//Perder por enemigos Nivel 1
-		
-		
+	
+	public void loseEnemy2() {	//Perder por enemigos Nivel 1
+
     	float dist =  (float) app.dist(posX, posY, enemies[7][16].getPosX(),enemies[7][16].getPosY());
 		if(dist <= 11) {
 
@@ -687,8 +695,7 @@ public void loseEnemy2() {	//Perder por enemigos Nivel 1
 			registerGame();
 		} 
 		}
-public void loseEnemy3() {	//Perder por enemigos Nivel 1
-	
+	public void loseEnemy3() {	//Perder por enemigos Nivel 1
 	
 	float dist1 =  (float) app.dist(posX, posY, enemies[1][3].getPosX(),enemies[1][3].getPosY());
 	float dist2 =  (float) app.dist(posX, posY, enemies[7][8].getPosX(),enemies[7][8].getPosY());
@@ -706,7 +713,7 @@ public void loseEnemy3() {	//Perder por enemigos Nivel 1
 	}
 	public void scoreMedicine() {
 		scores =scores+50;		
-}
+	}
 	
 	public void drawFloor1() {
 		//Vaciar el array antes de dibujar las paredes para eliminar paredes de otros niveles
