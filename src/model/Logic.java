@@ -129,8 +129,9 @@ public class Logic {
 		
 		animation.schedule(gravity, 10, 500);
 		
-		for (int i = 0; i <7; i++) {
-			float posX = app.random (-50,1000);
+		//Nubes
+		for (int i = 0; i <6; i++) {
+			float posX = app.random (-50,1150);
 			float posY = app.random (-50,117);
 			
 			clouds.add(new Cloud (posX, posY, app));
@@ -169,8 +170,9 @@ public class Logic {
 				countmin=0;
 				firstPaint=false;
 			}
-			game1.draw();
 			drawCloud();
+			game1.draw();
+			
 			//Activar cronometro
 			Chrono();
 			
@@ -211,6 +213,7 @@ public class Logic {
 				drawFloor2();
 				secondPaint=false;
 			}
+			drawCloud();
 			game2.draw();
 			Chrono();
 			drawCoins2();
@@ -246,6 +249,7 @@ public class Logic {
 				drawFloor3();
 				thirdPaint=false;
 			}
+			drawCloud();
 			game3.draw();
 			Chrono();
 			drawCoins3();

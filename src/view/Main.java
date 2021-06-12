@@ -26,6 +26,7 @@ public class Main extends PApplet {
 
 	@Override
 	public void draw() {
+		background(255);
 		
 	//System.out.println(mouseX+" "+mouseY);
 		c.changeScreen();

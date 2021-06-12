@@ -21,7 +21,7 @@ public class Cloud implements Runnable{
 
 	public void run() {
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			move();
 			
 			}
@@ -37,16 +37,16 @@ public class Cloud implements Runnable{
 	
 	
 	private void move() {
-		if(PApplet.second()%3==0) {
+		if(PApplet.second()%5==0) {
 			dir=true;
 			}else {
 				dir=false;
 			}
 		
 	    if(dir) {
-		   posX += 1;
+		   posX += 2;
 	    }else {
-		   posX -= 1;
+		   posX -= 0.5;
 		}
 	}
 
