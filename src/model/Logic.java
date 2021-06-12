@@ -562,10 +562,9 @@ public class Logic {
 	@SuppressWarnings("static-access")
 	public void deleteCoin1() {	//Borrar Monedas Nivel 1
 		
-            	float dist =  (float) app.dist(posX, posY, coins[1][17].getPosX(),coins[1][17].getPosY());
+            	float dist = app.dist(posX, posY, coins[1][17].getPosX(),coins[1][17].getPosY());
             	
-        		if(dist <= 11) {
-  
+        		if(dist <= 20) {
         			coins[1][17].setPosX(765);
         			coins[1][17].setPosY(10);
         			coins[1][17].setSize(21);
@@ -579,14 +578,14 @@ public class Logic {
 		float dist1 =  (float) app.dist(posX, posY, coins[7][8].getPosX(),coins[7][8].getPosY());
     	float dist2 =  (float) app.dist(posX, posY, coins[4][18].getPosX(),coins[4][18].getPosY());
     	
-		if(dist1 < 20) {
+		if(dist1 <= 20) {
 			coins[7][8].setPosX(745);
 			coins[7][8].setPosY(10);
 			coins[7][8].setSize(21);
 			scoreCoin();
 		}
 		
-		if(dist2 < 20) {
+		if(dist2 <= 20) {
 			coins[4][18].setPosX(788);
 			coins[4][18].setPosY(10);
 			coins[4][18].setSize(21);
@@ -599,14 +598,14 @@ public class Logic {
 		float dist1 =  (float) app.dist(posX, posY, coins[7][4].getPosX(),coins[7][4].getPosY());
     	float dist2 =  (float) app.dist(posX, posY, coins[0][10].getPosX(),coins[0][10].getPosY());
     	
-		if(dist1 < 20) {
+		if(dist1 <= 20) {
 			coins[7][4].setPosX(725);
 			coins[7][4].setPosY(10);
 			coins[7][4].setSize(21);
 			scoreCoin();
 		}
 		
-		if(dist2 < 24) {
+		if(dist2 <= 20) {
 			coins[0][10].setPosX(768);
 			coins[0][10].setPosY(10);
 			coins[0][10].setSize(21);
@@ -956,9 +955,14 @@ public class Logic {
 	//=============================================================//
 	
 	public void jump() {
-		if(barrier[cordX + 1][cordY] == 1) {
-			moveU();
-			moveU();
+		try {
+			if(barrier[cordX + 1][cordY] == 1) {
+				moveU();
+				moveU();
+			}
+		}
+		catch(Exception e) {
+			e.getLocalizedMessage();
 		}
 	}
 	
