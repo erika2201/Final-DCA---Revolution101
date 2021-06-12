@@ -25,7 +25,8 @@ public class Coin extends Collectable {
 			}
 		catch(InterruptedException e) {
 			e.printStackTrace();
-		}
+			
+		} 
 		
 	}
 	
