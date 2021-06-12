@@ -132,7 +132,7 @@ public class Logic {
 		//Nubes
 		for (int i = 0; i <6; i++) {
 			float posX = app.random (-50,1150);
-			float posY = app.random (-50,117);
+			float posY = app.random (-50,130);
 			
 			clouds.add(new Cloud (posX, posY, app));
 		}
