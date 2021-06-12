@@ -73,7 +73,6 @@ public class Logic {
 	String time2;
 	public int screen;
 	
-	
 	public Logic(PApplet app) {
 		this.app = app;
 		clouds = new ArrayList<Cloud>();
@@ -690,6 +689,7 @@ public class Logic {
 	//=============================================================//
 	// COMPROBAR PERDER POR ENEMIGOS
 	//=============================================================//
+	@SuppressWarnings("static-access")
 	public void loseEnemy1() {	//Perder por enemigos Nivel 1
 		
     	float dist =  (float) app.dist(posX, posY, enemies[6][10].getPosX(),enemies[6][10].getPosY());
@@ -700,6 +700,7 @@ public class Logic {
 		} 
 		}
 	
+	@SuppressWarnings("static-access")
 	public void loseEnemy2() {	//Perder por enemigos Nivel 1
 
     	float dist =  (float) app.dist(posX, posY, enemies[7][16].getPosX(),enemies[7][16].getPosY());
@@ -709,6 +710,7 @@ public class Logic {
 			registerGame();
 		} 
 		}
+	@SuppressWarnings("static-access")
 	public void loseEnemy3() {	//Perder por enemigos Nivel 1
 	
 	float dist1 =  (float) app.dist(posX, posY, enemies[1][3].getPosX(),enemies[1][3].getPosY());
