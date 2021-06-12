@@ -3,15 +3,15 @@ package model;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public abstract class Collectable {
-	protected int posX;
-	protected int posY;
+public abstract class Collectable implements Runnable {
+	protected float posX;
+	protected float posY;
 	protected int size;
 	protected PApplet app;
 	
 	protected PImage coin, med;
 	
-	public Collectable(int posX, int posY, int size, PApplet app) {
+	public Collectable(float posX, float posY, int size, PApplet app) {
 		this.posX = posX;
 		this.posY = posY;
 		this.size = size;
@@ -44,11 +44,11 @@ public abstract class Collectable {
 		this.app = app;
 	}
 
-	public int getPosX() {
+	public float getPosX() {
 		return posX;
 	}
 
-	public int getPosY() {
+	public float getPosY() {
 		return posY;
 	}
 	 

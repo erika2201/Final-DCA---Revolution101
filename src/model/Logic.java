@@ -380,7 +380,7 @@ public class Logic {
 	//=============================================================//
 	
 	public void createCoins1() { //Crear Monedas Nivel 1
-		coins[1][17] = new Coin(1040, 223,42, app);
+		coins[1][17] = new Coin(1040, 223,50, app);
 	}
 	
 	public void createCoins2() { //Crear Monedas Nivel 2
@@ -398,18 +398,18 @@ public class Logic {
 	//=============================================================//
 	
 	public void createMedical1() { //Crear Suministros Nivel 1
-		medicines[2][4] = new Medicine(270, 300,39, app);
-		medicines[2][12] = new Medicine(750, 300,39, app);
+		medicines[2][4] = new Medicine(270, 295,39, app);
+		medicines[2][12] = new Medicine(750, 295,39, app);
 	}
 	
 	public void createMedical2() { //Crear Suministros Nivel 2
-		medicines[2][0] = new Medicine(30, 300,39, app);
-		medicines[5][11] = new Medicine(690, 480,39, app);
+		medicines[2][0] = new Medicine(30, 295,39, app);
+		medicines[5][11] = new Medicine(690, 475,39, app);
 	}
 	
 	public void createMedical3() { //Crear Suministros Nivel 3
-		medicines[4][6] = new Medicine(390, 420,39, app);
-		medicines[6][13] = new Medicine(810, 540,39, app);
+		medicines[4][6] = new Medicine(390, 415,39, app);
+		medicines[6][13] = new Medicine(810, 535,39, app);
 	}
 	//=============================================================//
 	// CREAR ENEMIGOS
@@ -437,6 +437,7 @@ public class Logic {
 		if(coins[1][17] != null) {
 			if(coin1) {
 				coins[1][17].draw();
+				new Thread (coins[1][17]).start();
 			}
 		}
 	}
@@ -445,11 +446,13 @@ public class Logic {
 		if(coins[7][8] != null) {
 			if(coin1) {
 				coins[7][8].draw();
+				new Thread (coins[7][8]).start();
 			}
 		}
 		if(coins[4][18] != null) {
 			if(coin2) {
 				coins[4][18].draw();
+				new Thread (coins[4][18]).start();
 			}
 		}
 	}
@@ -458,11 +461,13 @@ public class Logic {
 		if(coins[7][4] != null) {
 			if(coin1) {
 				coins[7][4].draw();
+				new Thread (coins[7][4]).start();
 			}
 		}
 		if(coins[0][10] != null) {
 			if(coin2) {
 				coins[0][10].draw();
+				new Thread (coins[0][10]).start();
 			}
 		}
 	}
@@ -475,11 +480,13 @@ public class Logic {
 		if(medicines[2][4] != null) {
 			if(medicine1) {
 				medicines[2][4].draw();
+				new Thread (medicines[2][4]).start();
 			}
 		}
 		if(medicines[2][12] != null) {
 			if(medicine2) {
 				medicines[2][12].draw();
+				new Thread (medicines[2][12]).start();
 			}
 		}
 	}
@@ -488,11 +495,13 @@ public class Logic {
 		if(medicines[2][0] != null) {
 			if(medicine1) {
 				medicines[2][0].draw();
+				new Thread (medicines[2][0]).start();
 			}
 		}
 		if(medicines[5][11] != null) {
 			if(medicine2) {
 				medicines[5][11].draw();
+				new Thread (medicines[5][11]).start();
 			}
 		}
 	}
@@ -501,11 +510,13 @@ public class Logic {
 		if(medicines[4][6] != null) {
 			if(medicine1) {
 				medicines[4][6].draw();
+				new Thread (medicines[4][6]).start();
 			}
 		}
 		if(medicines[6][13] != null) {
 			if(medicine2) {
 				medicines[6][13].draw();
+				new Thread (medicines[6][13]).start();
 			}
 		}
 	}

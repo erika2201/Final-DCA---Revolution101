@@ -41,9 +41,9 @@ public class Enemy implements Runnable {
 				dir=false;
 			}
 	if(dir) {
-		posX += 0.2;
+		posX += 0.5;
 	}else {
-		posX -= 0.2;
+		posX -= 0.5;
 	}
 	}
 
