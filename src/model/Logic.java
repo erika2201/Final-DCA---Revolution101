@@ -14,6 +14,7 @@ import exception.NameLength;
 import exception.NoName;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.sound.SoundFile;
 import view.DefeatScreen;
 import view.Game1Screen;
 import view.Game2Screen;
@@ -73,12 +74,16 @@ public class Logic {
 	String time2;
 	public int screen;
 	
+	SoundFile coin, medicine;
+	
 	public Logic(PApplet app) {
 		this.app = app;
 		clouds = new ArrayList<Cloud>();
 		playerList = new LinkedList<Player>();
 		gamesList = new LinkedList<Game>();
 		lucasimg = app.loadImage("img/Lucas.png");
+		coin = new SoundFile (app, "music/Coin.mp3");
+		medicine = new SoundFile (app, "music/Medicine.mp3");
 		
 		coin1 = true;
 		coin2 = true;
@@ -564,6 +569,7 @@ public class Logic {
             	float dist = app.dist(posX, posY, coins[1][17].getPosX(),coins[1][17].getPosY());
             	
         		if(dist <= 20) {
+        			coin.play();
         			coins[1][17].setPosX(765);
         			coins[1][17].setPosY(10);
         			coins[1][17].setSize(21);
@@ -578,6 +584,7 @@ public class Logic {
     	float dist2 =  (float) app.dist(posX, posY, coins[4][18].getPosX(),coins[4][18].getPosY());
     	
 		if(dist1 <= 20) {
+			coin.play();
 			coins[7][8].setPosX(745);
 			coins[7][8].setPosY(10);
 			coins[7][8].setSize(21);
@@ -585,6 +592,7 @@ public class Logic {
 		}
 		
 		if(dist2 <= 20) {
+			coin.play();
 			coins[4][18].setPosX(788);
 			coins[4][18].setPosY(10);
 			coins[4][18].setSize(21);
@@ -598,6 +606,7 @@ public class Logic {
     	float dist2 =  (float) app.dist(posX, posY, coins[0][10].getPosX(),coins[0][10].getPosY());
     	
 		if(dist1 <= 20) {
+			coin.play();
 			coins[7][4].setPosX(725);
 			coins[7][4].setPosY(10);
 			coins[7][4].setSize(21);
@@ -605,6 +614,7 @@ public class Logic {
 		}
 		
 		if(dist2 <= 20) {
+			coin.play();
 			coins[0][10].setPosX(768);
 			coins[0][10].setPosY(10);
 			coins[0][10].setSize(21);
@@ -624,14 +634,14 @@ public class Logic {
             	float dist2 =  (float) app.dist(posX, posY, medicines[2][12].getPosX(),medicines[2][12].getPosY());
             	
         		if(dist1 <= 20) {
-  
+        			medicine.play();
         			medicines[2][4].setPosX(725);
         			medicines[2][4].setPosY(10);
         			medicines[2][4].setSize(19);
         			scoreMedicine();
         		} 
         		if(dist2 <= 20) {
-        			  
+        			medicine.play();
         			medicines[2][12].setPosX(745);
         			medicines[2][12].setPosY(10);
         			medicines[2][12].setSize(19);
@@ -648,14 +658,14 @@ public class Logic {
             	float dist2 =  (float) app.dist(posX, posY, medicines[5][11].getPosX(),medicines[5][11].getPosY());
             	
         		if(dist1 <= 20) {
-  
+        			medicine.play();
         			medicines[2][0].setPosX(725);
         			medicines[2][0].setPosY(10);
         			medicines[2][0].setSize(19);
         			scoreMedicine();
         		} 
         		if(dist2 <= 20) {
-        			  
+        			medicine.play();
         			medicines[5][11].setPosX(768);
         			medicines[5][11].setPosY(10);
         			medicines[5][11].setSize(19);
@@ -671,14 +681,14 @@ public class Logic {
             	float dist2 =  (float) app.dist(posX, posY, medicines[6][13].getPosX(),medicines[6][13].getPosY());
             	
         		if(dist1 <= 20) {
-  
+        			medicine.play();
         			medicines[4][6].setPosX(748);
         			medicines[4][6].setPosY(10);
         			medicines[4][6].setSize(19);
         			scoreMedicine();
         		} 
         		if(dist2 <= 20) {
-        			  
+        			medicine.play();
         			medicines[6][13].setPosX(790);
         			medicines[6][13].setPosY(10);
         			medicines[6][13].setSize(19);
