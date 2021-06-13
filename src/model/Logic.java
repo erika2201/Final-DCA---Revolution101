@@ -473,11 +473,24 @@ public class Logic {
 				coins[7][8].draw();
 				new Thread (coins[7][8]).start();
 			}
+			if(!coin1) {
+				coins[7][8].setPosX(745);
+				coins[7][8].setPosY(10);
+				coins[7][8].setSize(21);
+				coins[7][8].draw();
+			}
 		}
+		
 		if(coins[4][18] != null) {
 			if(coin2) {
 				coins[4][18].draw();
 				new Thread (coins[4][18]).start();
+			}
+			if(!coin2) {
+				coins[4][18].setPosX(788);
+				coins[4][18].setPosY(10);
+				coins[4][18].setSize(21);
+				coins[4][18].draw();
 			}
 		}
 	}
@@ -488,11 +501,24 @@ public class Logic {
 				coins[7][4].draw();
 				new Thread (coins[7][4]).start();
 			}
+			if(!coin1) {
+				coins[7][4].setPosX(725);
+				coins[7][4].setPosY(10);
+				coins[7][4].setSize(21);
+				coins[7][4].draw();
+			}
 		}
+		
 		if(coins[0][10] != null) {
 			if(coin2) {
 				coins[0][10].draw();
 				new Thread (coins[0][10]).start();
+			}
+			if(!coin2) {
+				coins[0][10].setPosX(768);
+				coins[0][10].setPosY(10);
+				coins[0][10].setSize(21);
+				coins[0][10].draw();
 			}
 		}
 	}
@@ -507,11 +533,24 @@ public class Logic {
 				medicines[2][4].draw();
 				new Thread (medicines[2][4]).start();
 			}
+			if(!medicine1) {
+				medicines[2][4].setPosX(725);
+				medicines[2][4].setPosY(10);
+				medicines[2][4].setSize(21);
+				medicines[2][4].draw();
+			}
 		}
+		
 		if(medicines[2][12] != null) {
 			if(medicine2) {
 				medicines[2][12].draw();
 				new Thread (medicines[2][12]).start();
+			}
+			if(!medicine2) {
+				medicines[2][12].setPosX(745);
+				medicines[2][12].setPosY(10);
+				medicines[2][12].setSize(21);
+				medicines[2][12].draw();
 			}
 		}
 	}
@@ -522,11 +561,24 @@ public class Logic {
 				medicines[2][0].draw();
 				new Thread (medicines[2][0]).start();
 			}
+			if(!medicine1) {
+				medicines[2][0].setPosX(725);
+				medicines[2][0].setPosY(10);
+				medicines[2][0].setSize(21);
+				medicines[2][0].draw();
+			}
 		}
+		
 		if(medicines[5][11] != null) {
 			if(medicine2) {
 				medicines[5][11].draw();
 				new Thread (medicines[5][11]).start();
+			}
+			if(!medicine2) {
+				medicines[5][11].setPosX(768);
+				medicines[5][11].setPosY(10);
+				medicines[5][11].setSize(21);
+				medicines[5][11].draw();
 			}
 		}
 	}
@@ -537,11 +589,24 @@ public class Logic {
 				medicines[4][6].draw();
 				new Thread (medicines[4][6]).start();
 			}
+			if(!medicine1) {
+				medicines[4][6].setPosX(748);
+				medicines[4][6].setPosY(10);
+				medicines[4][6].setSize(21);
+				medicines[4][6].draw();
+			}
 		}
+		
 		if(medicines[6][13] != null) {
 			if(medicine2) {
 				medicines[6][13].draw();
 				new Thread (medicines[6][13]).start();
+			}
+			if(!medicine2) {
+				medicines[6][13].setPosX(790);
+				medicines[6][13].setPosY(10);
+				medicines[6][13].setSize(21);
+				medicines[6][13].draw();
 			}
 		}
 	}
