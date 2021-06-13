@@ -172,6 +172,11 @@ public class Logic {
 				timer=0;
 				countsec=0;
 				countmin=0;
+				coin1 = true;
+				coin2 = true;
+				medicine1 = true;
+				medicine2 = true;
+				
 				firstPaint=false;
 			}
 			drawCloud();
@@ -215,6 +220,11 @@ public class Logic {
 				createMedical2();
 				createEnemy2();
 				drawFloor2();
+				coin1 = true;
+				coin2 = true;
+				medicine1 = true;
+				medicine2 = true;
+				
 				secondPaint=false;
 			}
 			drawCloud();
@@ -251,6 +261,11 @@ public class Logic {
 				createMedical3();
 				createEnemy3();
 				drawFloor3();
+				coin1 = true;
+				coin2 = true;
+				medicine1 = true;
+				medicine2 = true;
+				
 				thirdPaint=false;
 			}
 			drawCloud();
@@ -443,6 +458,12 @@ public class Logic {
 				coins[1][17].draw();
 				new Thread (coins[1][17]).start();
 			}
+			if(!coin1) {
+				coins[1][17].setPosX(765);
+				coins[1][17].setPosY(8);
+				coins[1][17].setSize(21);
+				coins[1][17].draw();
+			}
 		}
 	}
 	
@@ -566,59 +587,54 @@ public class Logic {
 	@SuppressWarnings("static-access")
 	public void deleteCoin1() {	//Borrar Monedas Nivel 1
 		
-            	float dist = app.dist(posX, posY, coins[1][17].getPosX(),coins[1][17].getPosY());
-            	
-        		if(dist <= 20) {
-        			coin.play();
-        			coins[1][17].setPosX(765);
-        			coins[1][17].setPosY(10);
-        			coins[1][17].setSize(21);
-        			scoreCoin();
-        		} 
+    	int dist = (int) app.dist(posX, posY, coins[1][17].getPosX(),coins[1][17].getPosY());
+    	
+		if(dist <= 20) {
+			scoreCoin();
+			sounCoin();
+			coin1 = false;
+			//drawSmallCoin();
+		} 
 	}
 	
 	@SuppressWarnings("static-access")
 	public void deleteCoin2() {	//Borrar Monedas Nivel 2
 	
-		float dist1 =  (float) app.dist(posX, posY, coins[7][8].getPosX(),coins[7][8].getPosY());
-    	float dist2 =  (float) app.dist(posX, posY, coins[4][18].getPosX(),coins[4][18].getPosY());
+		int dist1 =  (int) app.dist(posX, posY, coins[7][8].getPosX(),coins[7][8].getPosY());
+    	int dist2 =  (int) app.dist(posX, posY, coins[4][18].getPosX(),coins[4][18].getPosY());
     	
 		if(dist1 <= 20) {
-			coin.play();
-			coins[7][8].setPosX(745);
-			coins[7][8].setPosY(10);
-			coins[7][8].setSize(21);
 			scoreCoin();
+			sounCoin();
+			coin1 = false;
+			//drawSmallCoin();
 		}
 		
 		if(dist2 <= 20) {
-			coin.play();
-			coins[4][18].setPosX(788);
-			coins[4][18].setPosY(10);
-			coins[4][18].setSize(21);
-			scoreCoin();
+			scoreCoin2();
+			sounCoin2();
+			coin2 = false;
+			//drawSmallCoin();
 		}
 	}
 	
 	@SuppressWarnings("static-access")
 	public void deleteCoin3() {	//Borrar Monedas Nivel 3
-		float dist1 =  (float) app.dist(posX, posY, coins[7][4].getPosX(),coins[7][4].getPosY());
-    	float dist2 =  (float) app.dist(posX, posY, coins[0][10].getPosX(),coins[0][10].getPosY());
+		int dist1 =  (int) app.dist(posX, posY, coins[7][4].getPosX(),coins[7][4].getPosY());
+    	int dist2 =  (int) app.dist(posX, posY, coins[0][10].getPosX(),coins[0][10].getPosY());
     	
 		if(dist1 <= 20) {
-			coin.play();
-			coins[7][4].setPosX(725);
-			coins[7][4].setPosY(10);
-			coins[7][4].setSize(21);
 			scoreCoin();
+			sounCoin();
+			coin1 = false;
+			//drawSmallCoin();
 		}
 		
 		if(dist2 <= 20) {
-			coin.play();
-			coins[0][10].setPosX(768);
-			coins[0][10].setPosY(10);
-			coins[0][10].setSize(21);
-			scoreCoin();
+			scoreCoin2();
+			sounCoin2();
+			coin2 = false;
+			//drawSmallCoin();
 		}
 	}
 	
@@ -630,46 +646,41 @@ public class Logic {
 	public void deleteMedical1() {
 		//Borrar Suministros Nivel 1
 		
-            	float dist1 =  (float) app.dist(posX, posY, medicines[2][4].getPosX(),medicines[2][4].getPosY());
-            	float dist2 =  (float) app.dist(posX, posY, medicines[2][12].getPosX(),medicines[2][12].getPosY());
+            	int dist1 =  (int) app.dist(posX, posY, medicines[2][4].getPosX(),medicines[2][4].getPosY());
+            	int dist2 =  (int) app.dist(posX, posY, medicines[2][12].getPosX(),medicines[2][12].getPosY());
             	
         		if(dist1 <= 20) {
-        			medicine.play();
-        			medicines[2][4].setPosX(725);
-        			medicines[2][4].setPosY(10);
-        			medicines[2][4].setSize(19);
         			scoreMedicine();
+        			soundMed();
+        			medicine1 = false;
+        			//drawSmallMed();
         		} 
+        		
         		if(dist2 <= 20) {
-        			medicine.play();
-        			medicines[2][12].setPosX(745);
-        			medicines[2][12].setPosY(10);
-        			medicines[2][12].setSize(19);
-        			scoreMedicine();
+        			scoreMedicine2();
+        			soundMed2();
+        			medicine2 = false;
+        			//drawSmallMed();
         		} 
-          
-		
 	}
 	
 	@SuppressWarnings("static-access")
 	public void deleteMedical2() {	//Borrar Suministros Nivel 2
 		
-            	float dist1 =  (float) app.dist(posX, posY, medicines[2][0].getPosX(),medicines[2][0].getPosY());
-            	float dist2 =  (float) app.dist(posX, posY, medicines[5][11].getPosX(),medicines[5][11].getPosY());
+            	int dist1 =  (int) app.dist(posX, posY, medicines[2][0].getPosX(),medicines[2][0].getPosY());
+            	int dist2 =  (int) app.dist(posX, posY, medicines[5][11].getPosX(),medicines[5][11].getPosY());
             	
         		if(dist1 <= 20) {
-        			medicine.play();
-        			medicines[2][0].setPosX(725);
-        			medicines[2][0].setPosY(10);
-        			medicines[2][0].setSize(19);
         			scoreMedicine();
+        			soundMed();
+        			medicine1 = false;
+        			//drawSmallMed();
         		} 
         		if(dist2 <= 20) {
-        			medicine.play();
-        			medicines[5][11].setPosX(768);
-        			medicines[5][11].setPosY(10);
-        			medicines[5][11].setSize(19);
-        			scoreMedicine();
+        			scoreMedicine2();
+        			soundMed2();
+        			medicine2 = false;
+        			//drawSmallMed();
         		} 
          
 	}
@@ -677,22 +688,21 @@ public class Logic {
 	@SuppressWarnings("static-access")
 	public void deleteMedical3() {	//Borrar Suministros Nivel 3s
 		
-            	float dist1 =  (float) app.dist(posX, posY, medicines[4][6].getPosX(),medicines[4][6].getPosY());
-            	float dist2 =  (float) app.dist(posX, posY, medicines[6][13].getPosX(),medicines[6][13].getPosY());
+            	int dist1 =  (int) app.dist(posX, posY, medicines[4][6].getPosX(),medicines[4][6].getPosY());
+            	int dist2 =  (int) app.dist(posX, posY, medicines[6][13].getPosX(),medicines[6][13].getPosY());
             	
         		if(dist1 <= 20) {
-        			medicine.play();
-        			medicines[4][6].setPosX(748);
-        			medicines[4][6].setPosY(10);
-        			medicines[4][6].setSize(19);
         			scoreMedicine();
+        			soundMed();
+        			medicine1 = false;
+        			//drawSmallMed();
         		} 
+        		
         		if(dist2 <= 20) {
-        			medicine.play();
-        			medicines[6][13].setPosX(790);
-        			medicines[6][13].setPosY(10);
-        			medicines[6][13].setSize(19);
-        			scoreMedicine();
+        			scoreMedicine2();
+        			soundMed2();
+        			medicine2 = false;
+        			//drawSmallMed();
         		} 
            
 	}
@@ -735,10 +745,51 @@ public class Logic {
 	//=============================================================//
 	
 	public void scoreCoin() {
-				scores =scores+100;		
+		if(coin1) {
+			scores =scores+100;		
+		}
 	}
+	
+	public void scoreCoin2() {
+		if(coin2) {
+			scores =scores+100;		
+		}
+	}
+	
 	public void scoreMedicine() {
-		scores =scores+50;		
+		if(medicine1) {
+			scores =scores+50;	
+		}
+	}
+	
+	public void scoreMedicine2() {
+		if(medicine2) {
+			scores =scores+50;	
+		}
+	}
+	
+	public void sounCoin() {
+		if(coin1) {
+			coin.play();
+		}
+	}
+	
+	public void sounCoin2() {
+		if(coin2) {
+			coin.play();
+		}
+	}
+	
+	public void soundMed() {
+		if(medicine1) {
+			medicine.play();
+		}
+	}
+	
+	public void soundMed2() {
+		if(medicine2) {
+			medicine.play();
+		}
 	}
 	
 	public void drawFloor1() {
