@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import exception.NameLength;
 import exception.NoName;
+import exception.NoNumber;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.sound.SoundFile;
@@ -1145,7 +1146,7 @@ public class Logic {
 									for(char c : chars){
 								         if(Character.isDigit(c)){
 								        	 JOptionPane.showMessageDialog(null, "El nombre no debe tener números", "Woops", JOptionPane.ERROR_MESSAGE);
-												throw new NameLength("El nombre no debe tener números");
+												throw new NoNumber("El nombre no debe tener números");
 								         }
 								     
 								         }}else{
